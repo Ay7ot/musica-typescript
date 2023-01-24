@@ -3,6 +3,8 @@ export interface AppContextInterface {
     dispatch: React.Dispatch<any>
     accessToken: string;
     refreshToken: string;
+    isSearchToggled: boolean
+    searchParameter: string
 }
 
 export interface ActionInterface {
@@ -11,5 +13,6 @@ export interface ActionInterface {
     payload:{
         accessToken: string;
         refreshToken: string;
+        stringPayload: string;
     }
 }

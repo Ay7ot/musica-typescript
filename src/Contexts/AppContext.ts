@@ -6,4 +6,6 @@ export const AppContext = createContext<AppContextInterface>({
     dispatch: () => {},
     accessToken: '',
     refreshToken: '',
+    isSearchToggled: false,
+    searchParameter: ''
 });

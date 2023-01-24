@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { AppContext } from "../Contexts/AppContext"
+import Navbar from "./Navbar"
 
 export default function Home() {
   
@@ -11,11 +12,9 @@ export default function Home() {
     localStorage.clear()
   }
   return (
-    <div className="bg-slate-900 min-h-screen flex flex-col items-center justify-center">
-        <p className="text-white font-bold text-[1.1rem] tracking-wider">Hello</p>
-        <button onClick={()=>Logout()} className='bg-green-500 p-2 text-white font-bold rounded-md mt-6'>
-          Log Out
-        </button>
+    <div className="bg-[#1E1E1E] min-h-screen p-6 font-quicksand">
+      <Navbar />
+      <button onClick={()=>Logout()} className='mt-6 bg-green-500 p-2 text-white rounded-md font-bold'>Logout</button>
     </div>
   )
 }

@@ -95,7 +95,7 @@ export default function Login() {
         <>
             { isLoggedIn ? 
                 <Home /> :
-                 <div className="bg-slate-900 min-h-screen flex flex-col items-center justify-center">
+                 <div className="bg-[#1E1E1E] min-h-screen flex flex-col items-center justify-center">
                     <p className="text-white font-bold text-[2rem] tracking-wide">Welcome!</p>
                     <button 
                         onClick={()=>{

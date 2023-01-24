@@ -10,7 +10,9 @@ function App() {
     isLoggedIn: false,
     dispatch: () => {},
     accessToken: '',
-    refreshToken: ''
+    refreshToken: '',
+    isSearchToggled: false,
+    searchParameter: ''
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -31,6 +33,16 @@ function App() {
           accessToken: action.payload.accessToken,
           refreshToken: action.payload.refreshToken
         }
+      case 'setSearchToggled':
+        return {
+          ...state,
+          isSearchToggled: !state.isSearchToggled
+        }
+      case 'setSearchParameter':
+        return {
+          ...state,
+          searchParameter: action.payload.stringPayload
+        }
       default :
         return state
     }
@@ -39,9 +51,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter}}>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
