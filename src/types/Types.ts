@@ -4,7 +4,9 @@ export interface AppContextInterface {
     accessToken: string;
     refreshToken: string;
     isSearchToggled: boolean
-    searchParameter: string
+    searchParameter: string,
+    icons: IconType;
+    navToggled: boolean
 }
 
 export interface ActionInterface {
@@ -14,5 +16,39 @@ export interface ActionInterface {
         accessToken: string;
         refreshToken: string;
         stringPayload: string;
+        iconId: string;
     }
 }
+
+export type IconType =  [
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    },
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    },
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    },
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    },
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    },
+    {
+        name: string,
+        id: string,
+        isActive: boolean
+    }
+]

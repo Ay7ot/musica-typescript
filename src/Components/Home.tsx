@@ -1,20 +1,37 @@
 import { useContext } from "react"
 import { AppContext } from "../Contexts/AppContext"
 import Navbar from "./Navbar"
+import NavMobile from "./NavMobile"
+import useWindowDimensions from "../Hooks/windowDimensions"
+import HomeHeader from "./HomeHeader"
 
 export default function Home() {
   
-  const {dispatch} = useContext(AppContext)
+  const { dispatch , navToggled} = useContext(AppContext)
+  const { width } = useWindowDimensions()
 
   function Logout(){
     dispatch({type: "Logout"})
     window.location.assign('http://localhost:5173/')
     localStorage.clear()
   }
+  
   return (
-    <div className="bg-[#1E1E1E] min-h-screen p-6 font-quicksand">
-      <Navbar />
-      <button onClick={()=>Logout()} className='mt-6 bg-green-500 p-2 text-white rounded-md font-bold'>Logout</button>
+    <div className="bg-[#1E1E1E] min-h-screen p-6 font-quicksand w-full">
+      {navToggled ? 
+        <>
+          <NavMobile />
+        </>:
+        <>
+        <Navbar />
+        <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw]' :'mt-6'}`}>
+          <div className="">
+            <HomeHeader />
+          </div>
+          <button onClick={()=>Logout()} className='mt-6 bg-green-500 p-2 text-white rounded-md font-bold'>Logout</button>
+        </section>
+        </>
+      }
     </div>
   )
 }

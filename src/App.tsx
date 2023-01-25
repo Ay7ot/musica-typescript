@@ -1,8 +1,9 @@
 import { useReducer, useState } from "react"
 import { Routes, Route } from 'react-router-dom'
 import Login from "./Components/Login"
-import { ActionInterface, AppContextInterface } from "./types/Types"
+import { ActionInterface, AppContextInterface, IconType } from "./types/Types"
 import { AppContext } from "./Contexts/AppContext"
+import {nanoid} from 'nanoid'
 
 function App() {
   
@@ -12,7 +13,40 @@ function App() {
     accessToken: '',
     refreshToken: '',
     isSearchToggled: false,
-    searchParameter: ''
+    searchParameter: '',
+    icons: [
+    {
+        name: "Home",
+        id: nanoid(),
+        isActive: true
+    },
+    {
+        name: "Collection",
+        id: nanoid(),
+        isActive: false
+    },
+    {
+        name: "Radio",
+        id: nanoid(),
+        isActive: false
+    },
+    {
+        name: "Videos",
+        id: nanoid(),
+        isActive: false
+    },
+    {
+        name: "Profile",
+        id: nanoid(),
+        isActive: false
+    },
+    {
+        name: "Logout",
+        id: nanoid(),
+        isActive: false
+    }
+    ],
+    navToggled: false
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -36,12 +70,30 @@ function App() {
       case 'setSearchToggled':
         return {
           ...state,
-          isSearchToggled: !state.isSearchToggled
+          isSearchToggled: true
         }
       case 'setSearchParameter':
         return {
           ...state,
           searchParameter: action.payload.stringPayload
+        }
+      case 'setNavToggled':
+        return {
+          ...state,
+          navToggled: !state.navToggled
+        }
+      case 'setNavActive' :
+        const newIcons: IconType = [...state.icons];
+        newIcons.forEach(icon => {
+          if (icon.id === action.payload.iconId) {
+              icon.isActive = true;
+          } else {
+              icon.isActive = false;
+          }
+        });
+        return {
+          ...state,
+          icons: newIcons
         }
       default :
         return state
@@ -51,9 +103,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled}}>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
