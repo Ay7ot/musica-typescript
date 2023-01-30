@@ -1,7 +1,7 @@
-import { useReducer, useState } from "react"
+import { useReducer, useState , useEffect} from "react"
 import { Routes, Route } from 'react-router-dom'
 import Login from "./Components/Login"
-import { ActionInterface, AppContextInterface, IconType } from "./types/Types"
+import { ActionInterface, AppContextInterface, IconType, mainHeaderType } from "./types/Types"
 import { AppContext } from "./Contexts/AppContext"
 import {nanoid} from 'nanoid'
 
@@ -46,7 +46,14 @@ function App() {
         isActive: false
     }
     ],
-    navToggled: false
+    navToggled: false,
+    headerItem: {
+      image: '',
+      href: '',
+      name: '',
+      description: ''
+    },
+    featuredPlaylists: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -95,17 +102,46 @@ function App() {
           ...state,
           icons: newIcons
         }
+      case 'setHeaderMain':
+        return {
+          ...state,
+          headerItem: {
+            ...state.headerItem,
+            description: action.payload.descriptionPayload,
+            href: action.payload.hrefPayload,
+            image: action.payload.imagePayload,
+            name: action.payload.namePayload,
+          }
+        }
+      case 'setFeaturedPlaylists':
+        return {
+          ...state,
+          featuredPlaylists: [
+            ...state.featuredPlaylists,
+            {
+              description: action.payload.descriptionPayload,
+              href: action.payload.hrefPayload,
+              image: action.payload.imagePayload,
+              name: action.payload.namePayload,
+            }
+          ]
+        }
       default :
         return state
     }
   }
   
   const [mainState, dispatch] = useReducer(reducer, initialState)
-  
+
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists} = mainState
+
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled}}>
+    <AppContext.Provider 
+        value={{
+          isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists
+        }}
+      >
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>

@@ -6,7 +6,9 @@ export interface AppContextInterface {
     isSearchToggled: boolean
     searchParameter: string,
     icons: IconType;
-    navToggled: boolean
+    navToggled: boolean;
+    headerItem: mainHeaderType;
+    featuredPlaylists: mainHeaderType[];
 }
 
 export interface ActionInterface {
@@ -17,7 +19,18 @@ export interface ActionInterface {
         refreshToken: string;
         stringPayload: string;
         iconId: string;
+        descriptionPayload: string;
+        hrefPayload: string;
+        namePayload: string;
+        imagePayload: string;
     }
+}
+
+export type mainHeaderType = {
+    image: string;
+    href: string;
+    name:string;
+    description: string | null;
 }
 
 export type IconType =  [
@@ -51,4 +64,4 @@ export type IconType =  [
         id: string,
         isActive: boolean
     }
-]
+];
