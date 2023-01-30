@@ -17,14 +17,14 @@ export default function Home() {
   }
   
   return (
-    <div className="bg-[#1E1E1E] min-h-screen p-6 font-quicksand w-full">
+    <div className="bg-[#100e0e] min-h-screen p-6 font-quicksand w-full">
       {navToggled ? 
         <>
           <NavMobile />
         </>:
         <>
         <Navbar />
-        <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw]' :'mt-6'}`}>
+        <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] lg:mt-4 w-[85vw]' :'mt-6'}`}>
           <div className="">
             <HomeHeader />
           </div>

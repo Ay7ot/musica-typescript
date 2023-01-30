@@ -41,6 +41,13 @@ export const AppContext = createContext<AppContextInterface>({
             isActive: false
         }
     ],
-    navToggled: false
+    navToggled: false,
+    headerItem: {
+        image: '',
+        name: '',
+        description: '',
+        href: '',
+    },
+    featuredPlaylists: []
         
 });

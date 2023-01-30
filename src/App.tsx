@@ -46,7 +46,14 @@ function App() {
         isActive: false
     }
     ],
-    navToggled: false
+    navToggled: false,
+    headerItem: {
+      name: '',
+      image:'',
+      href: '',
+      description: ''
+    },
+    featuredPlaylists: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -95,6 +102,30 @@ function App() {
           ...state,
           icons: newIcons
         }
+      case 'setHeaderMain':
+        return {
+          ...state,
+          headerItem: {
+            image: action.payload.imagePayload,
+            name: action.payload.namePayload,
+            href: action.payload.hrefPayload,
+            description: action.payload.descriptionPayload
+          }
+        }
+      case 'setFeaturedPlaylists': 
+        return {
+          ...state,
+          featuredPlaylists: [
+            ...state.featuredPlaylists,
+            {
+              name: action.payload.namePayload,
+              href: action.payload.hrefPayload,
+              description: action.payload.descriptionPayload,
+              image: action.payload.imagePayload
+            }
+          ]
+
+        }
       default :
         return state
     }
@@ -103,9 +134,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists}}>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>

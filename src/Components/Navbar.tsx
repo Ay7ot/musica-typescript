@@ -20,7 +20,7 @@ export default function Navbar() {
     return (
         <>
             { width > 768 ? 
-                <>
+                <div className='sticky top-0 py-4 bg-[#100e0e] z-[999999]'>
                     <div className='flex items-center ml-1 lg:ml-4'>
                         <LazyLoadImage 
                             src='logo.svg'
@@ -57,9 +57,9 @@ export default function Navbar() {
                            })}
                         </div>
                     </nav>
-                </> 
+                </div> 
                 :
-                <nav className='flex items-center justify-between'>
+                <nav className='flex items-center justify-between sticky top-0 bg-[#100e0e] py-4'>
                    <div className='flex items-center sticky top-0'>
                         <div className='h-[0.8rem] flex flex-col justify-between mr-6' onClick={()=>dispatch({type: 'setNavToggled'})}>
                             <div className='bg-[#808080] w-[1.3rem] h-[2px] rounded-sm'></div>
