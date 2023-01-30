@@ -1,12 +1,20 @@
 import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../Contexts/AppContext'
+import useWindowDimensions from '../Hooks/windowDimensions';
 import SpotifyWebApi from 'spotify-web-api-js';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FaPlayCircle } from 'react-icons/fa';
+import { RiPlayList2Fill, RiHeart2Fill } from 'react-icons/ri',
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
+import 'swiper/css/autoplay'
 
 export default function HomeHeader() {
     const SpotifyApi = new SpotifyWebApi();
     SpotifyApi.setAccessToken(localStorage.getItem('access_token'))
     
-    const { dispatch } = useContext(AppContext);
+    const { width } = useWindowDimensions()
+    const { dispatch, headerItem, featuredPlaylists } = useContext(AppContext);
     
     useEffect(() => {
         return () => {
