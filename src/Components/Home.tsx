@@ -17,7 +17,7 @@ export default function Home() {
   }
   
   return (
-    <div className="bg-[#0a0a0a] min-h-screen p-6 font-quicksand w-full">
+    <div className="bg-[#1E1E1E] min-h-screen p-6 font-quicksand w-full">
       {navToggled ? 
         <>
           <NavMobile />
@@ -25,7 +25,9 @@ export default function Home() {
         <>
         <Navbar />
         <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw]' :'mt-6'}`}>
-          <HomeHeader />
+          <div className="">
+            <HomeHeader />
+          </div>
           <button onClick={()=>Logout()} className='mt-6 bg-green-500 p-2 text-white rounded-md font-bold'>Logout</button>
         </section>
         </>

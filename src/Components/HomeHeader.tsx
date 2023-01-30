@@ -58,8 +58,8 @@ export default function HomeHeader() {
     }, [])
     
     return (
-        <div className='px-[1px] lg:flex justify-between'>
-            <div className='rounded-2xl sm:flex items-centerlg:w-[60vw]'>
+        <div className='lg:grid lg:grid-cols-12'>
+            <div className='rounded-2xl sm:flex items-center w-[60vw]'>
                 <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl h-[370px] w-full max-w-[370px]'/>
                 <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px]'>   
                     <p className='text-[2rem] md:text-[2.3rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
@@ -73,10 +73,10 @@ export default function HomeHeader() {
                             <i className='text-yellow-400'><RiPlayList2Fill /></i>
                             <p className='ml-2 text-[0.8rem] font-semibold text-white'>Add to Collection</p>
                         </button>
-                    </div>
+                    </div>  
                 </div>
             </div>
-            <div className='mt-12 w-full'>
+            <div className='mt-12'>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Top Charts</h2>
                 { 
                     width > 1024 ?
@@ -95,7 +95,7 @@ export default function HomeHeader() {
                                             <div></div>
                                             <div>
                                                 <div>
-                                                    <i className=''><RiHeart2Fill /></i>
+                                                    <i className='mt'><RiHeart2Fill /></i>
                                                 </div>
                                             </div>
                                         </div>
