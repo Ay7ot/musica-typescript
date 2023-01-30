@@ -1,65 +1,22 @@
 import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../Contexts/AppContext'
 import SpotifyWebApi from 'spotify-web-api-js';
-import useWindowDimensions from '../Hooks/windowDimensions';
-import { FaPlayCircle } from 'react-icons/fa';
-import { RiPlayList2Fill, RiHeart2Fill } from 'react-icons/ri'
-import Slider from 'react-slick'
-import {Swiper, SwiperSlide} from 'swiper/react';
-import 'swiper/css'
-import 'swiper/css/autoplay'
-import { Autoplay } from 'swiper';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 export default function HomeHeader() {
     const SpotifyApi = new SpotifyWebApi();
-    const { dispatch, accessToken, headerItem, featuredPlaylists } = useContext(AppContext);
-    const { width } = useWindowDimensions();
-    SpotifyApi.setAccessToken(accessToken);
-
-    console.log(width)
-    useEffect(() => {
-        SpotifyApi.getFeaturedPlaylists()
-            .then((data) => {
-                const playlistNeededInfo = data.playlists.items[0]
-                dispatch({
-                    type: 'setHeaderMain', 
-                    payload: {
-                        descriptionPayload: playlistNeededInfo.description,
-                        hrefPayload: playlistNeededInfo.href,
-                        imagePayload: playlistNeededInfo.images[0].url,
-                        namePayload: playlistNeededInfo.name,
-                    }
-                })
-            }),
-            function(err: string){
-                console.error(err)
-            }
-    }, [])
+    SpotifyApi.setAccessToken(localStorage.getItem('access_token'))
+    
+    const { dispatch } = useContext(AppContext);
     
     useEffect(() => {
-        SpotifyApi.getFeaturedPlaylists()
-            .then((data) => {
-                data.playlists.items.map((item)=>(
-                   dispatch({
-                    type: 'setFeaturedPlaylists',
-                    payload:  {
-                        namePayload: item.name,
-                        imagePayload: item.images[0].url,
-                        hrefPayload: item.href,
-                        descriptionPayload: item.description
-                    }
-                   })
-                ))
-            }),
-            function(err: string){
-                console.error(err)
-            }
+        return () => {
+            
+      }
     }, [])
     
     return (
-        <div className='lg:grid lg:grid-cols-12'>
-            <div className='rounded-2xl sm:flex items-center w-[60vw]'>
+        <div className='lg:grid lg:grid-cols-12 px-[1px]'>
+            <div className='rounded-2xl sm:flex items-centerlg:w-[60vw]'>
                 <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl h-[370px] w-full max-w-[370px]'/>
                 <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px]'>   
                     <p className='text-[2rem] md:text-[2.3rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
@@ -73,7 +30,7 @@ export default function HomeHeader() {
                             <i className='text-yellow-400'><RiPlayList2Fill /></i>
                             <p className='ml-2 text-[0.8rem] font-semibold text-white'>Add to Collection</p>
                         </button>
-                    </div>  
+                    </div>
                 </div>
             </div>
             <div className='mt-12'>
