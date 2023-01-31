@@ -24,10 +24,8 @@ export default function Home() {
         </>:
         <>
         <Navbar />
-        <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] lg:mt-4 w-[85vw]' :'mt-6'}`}>
-          <div className="">
-            <HomeHeader />
-          </div>
+        <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw] sm:mt-4' :'mt-6'}`}>
+          <HomeHeader />
           <button onClick={()=>Logout()} className='mt-6 bg-green-500 p-2 text-white rounded-md font-bold'>Logout</button>
         </section>
         </>

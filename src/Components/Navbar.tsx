@@ -8,7 +8,7 @@ import useIcon from '../Hooks/useIcons'
 
 export default function Navbar() {
     
-    const {width} = useWindowDimensions()
+    const { width } = useWindowDimensions()
     const {isSearchToggled, dispatch, icons} = useContext(AppContext)
     
     // Come Back to build the search function and page for the site

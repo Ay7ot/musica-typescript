@@ -9,6 +9,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 import 'swiper/css'
 import 'swiper/css/autoplay'
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { mainPlaylistType } from '../types/Types';
 
 export default function HomeHeader() {
@@ -43,30 +46,20 @@ export default function HomeHeader() {
     useEffect(() => {
         SpotifyApi.getFeaturedPlaylists()
             .then(data=>{
-               const newPlaylistArray = data.playlists.items.map(playlist=>{
-                    return {
-                        name: playlist.name,
-                        href: playlist.href,
-                        image: playlist.images[0].url,
-                        description: playlist.description,
-
-                    }
-                })
-                newPlaylistArray.map(playlist=>{
-                    if(featuredPlaylists.includes(playlist)){
-                        return
-                    }else{
-                        dispatch({
-                            type: 'setFeaturedPlaylists',
-                            payload: {
-                                namePayload: playlist.name,
-                                hrefPayload: playlist.href,
-                                imagePayload: playlist.image,
-                                descriptionPayload: playlist.description
-                            }
-                        })
-                    }
-                })
+               const playlistItems = data.playlists.items
+               dispatch({
+                type: 'setFeaturedPlaylists',
+                payload: {
+                    playlistPayload: playlistItems.map(playlist=>{
+                        return {
+                            name: playlist.name,
+                            description: playlist.description,
+                            href: playlist.href,
+                            image: playlist.images[0].url
+                        }
+                    })
+                }
+               })
             },
             function(err){
                 console.error(err)
@@ -74,47 +67,69 @@ export default function HomeHeader() {
         )
     }, [isLoggedIn])    
     
+    const slickSettings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        vertical: true,
+        verticalSwiping: true,
+        autoplay: true,
+        speed: 3000,
+        arrows: false
+    }
     
     return (
         <div className='lg:flex justify-between px-[1px]'>
-            <div className='rounded-2xl sm:flex items-center lg:w-[60%]'>
-                <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl h-[370px] w-full lg:w-[250px] lg:h-[250px]'/>
-                <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px]'>   
+            <div className='rounded-2xl sm:flex sm lg:w-[60%]'>
+                <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl h-[370px] lg:w-[300px] lg:h-[300px]'/>
+                <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px] lg:relative top-14 xl:top-16'>   
                     <p className='text-[2rem] md:text-[2.3rem] lg:text-[1.5rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
                     <p className='text-[0.9rem] font-semibold text-[#808080] lg:text-[0.8rem]'>{headerItem.description}</p>
                     <div className='grid grid-cols-2 sm:flex  sm:gap-0 gap-7 justify-between mt-3 sm:px-2 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-1'>
                         <button className='bg-[#808080] flex p-2 items-center justify-center rounded-full'>
                             <i className='text-yellow-400 lg:text-[0.9rem]'><FaPlayCircle /></i>
-                            <p className='ml-2 text-[0.8rem] lg:text-[0.5rem] xl:text-[0.7rem] font-semibold text-white'>Play All</p>
+                            <p className='ml-2 text-[0.8rem] lg:text-[0.6rem] xl:text-[0.7rem] font-semibold text-white'>Play All</p>
                         </button>
                         <button className='bg-[#808080] flex p-2 items-center justify-center rounded-full'>
                             <i className='text-yellow-400 lg:text-[0.9rem]'><RiPlayList2Fill /></i>
-                            <p className='ml-2 text-[0.8rem] lg:text-[0.5rem] xl:text-[0.7rem] font-semibold text-white'>Add to Collection</p>
+                            <p className='ml-2 text-[0.8rem] lg:text-[0.6rem] xl:text-[0.7rem] font-semibold text-white'>Add to Collection</p>
                         </button>
                     </div>
                 </div>
             </div>
-            <div className='mt-12 lg:w-[50%]'>
+            <div className='mt-12 lg:mt-0 lg:w-[40%] lg:pl-5'>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Featured Playlists</h2>
                 { 
                     width > 1024 ?
-                    <Swiper 
-                        direction='vertical'
-                        modules={[Autoplay]}
-                        autoplay={{delay:4000}}
-                        slidesPerView={3}
-                        spaceBetween={10}
-                    >
+                    <Slider {...slickSettings}>
                         {
-                            featuredPlaylists.map(playlist=>{
+                            featuredPlaylists.map(playlist => {
                                 return (
-                                    <SwiperSlide key={playlist.name}>
-                                        
-                                    </SwiperSlide>
+                                    <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2' key={playlist.name}>
+                                        <div className='flex justify-between items-center'>
+                                            <div className='flex w-[80%]'>
+                                                <img src={playlist.image} className='h-[64px] rounded-lg'/>
+                                                <div className='ml-2 flex flex-col'>
+                                                    <p className='text-[1rem] text-[#d4d1d1] font-semibold'>
+                                                        {playlist.name}
+                                                    </p>
+                                                    <p className='text-gray-500 text-[12px]'>
+                                                        {playlist.description}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div className=''>
+                                                <div className='p-1 rounded-full border-[1px] border-[#808080] text-[#808080] text-[0.9rem]'>
+                                                    <i><RiHeart2Fill /></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 )
                             })
                         }
-                    </Swiper>
+                    </Slider>
                     :
                     <Swiper 
                         spaceBetween={50}
@@ -133,7 +148,7 @@ export default function HomeHeader() {
                         {featuredPlaylists.map(playlist=>{
                             return (
                                 <SwiperSlide key={playlist.name}>
-                                    <div className='flex justify-between p-4 h-[300px] bg-[#1A1E1F] rounded-2xl'>
+                                    <div className='flex justify-between p-4 h-[310px] bg-[#1A1E1F] rounded-2xl'>
                                         <div className='w-[80%]'>
                                             <img 
                                                 src={playlist.image}
@@ -142,7 +157,7 @@ export default function HomeHeader() {
                                             <h3 className='text-[1.1rem] text-white font-quicksand mt-4 tracking-wide'>
                                                 {playlist.name}
                                             </h3>
-                                            <p className='text-[0.88rem] text-[#808080] mt-4'>
+                                            <p className='text-[0.88rem] text-[#808080] mt-2'>
                                                 {playlist.description}
                                             </p>
                                         </div>

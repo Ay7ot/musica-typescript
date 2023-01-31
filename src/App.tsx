@@ -114,17 +114,8 @@ function App() {
         }
       case 'setFeaturedPlaylists': 
         return {
-          ...state,
-          featuredPlaylists: [
-            ...state.featuredPlaylists,
-            {
-              name: action.payload.namePayload,
-              href: action.payload.hrefPayload,
-              description: action.payload.descriptionPayload,
-              image: action.payload.imagePayload
-            }
-          ]
-
+          ...state, 
+          featuredPlaylists: action.payload.playlistPayload
         }
       default :
         return state
