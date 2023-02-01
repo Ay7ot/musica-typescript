@@ -48,6 +48,8 @@ export const AppContext = createContext<AppContextInterface>({
         description: '',
         href: '',
     },
-    featuredPlaylists: []
+    featuredPlaylists: [],
+    recommendedPlaylists: [],
+    userPlaylist: []
         
 });

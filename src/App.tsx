@@ -53,7 +53,9 @@ function App() {
       href: '',
       description: ''
     },
-    featuredPlaylists: []
+    featuredPlaylists: [],
+    recommendedPlaylists: [],
+    userPlaylist: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -117,6 +119,16 @@ function App() {
           ...state, 
           featuredPlaylists: action.payload.playlistPayload
         }
+      case 'setRecommendedPlaylists':
+        return {
+          ...state,
+          recommendedPlaylists: action.payload.recommendedPlaylistPayload
+        }
+      case 'setUserPlaylists':
+        return {
+          ...state,
+          userPlaylist: action.payload.userPlaylistPayload
+        }
       default :
         return state
     }
@@ -125,9 +137,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist}}>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>

@@ -24,7 +24,6 @@ export default function HomeHeader() {
     useEffect(() => {
         SpotifyApi.getFeaturedPlaylists()
             .then((data)=>{
-                console.log(data)
                 const neededPlaylistInfo = data.playlists.items[0]
                 dispatch({
                     type: 'setHeaderMain',
@@ -47,19 +46,23 @@ export default function HomeHeader() {
         SpotifyApi.getFeaturedPlaylists()
             .then(data=>{
                const playlistItems = data.playlists.items
-               dispatch({
-                type: 'setFeaturedPlaylists',
-                payload: {
-                    playlistPayload: playlistItems.map(playlist=>{
-                        return {
-                            name: playlist.name,
-                            description: playlist.description,
-                            href: playlist.href,
-                            image: playlist.images[0].url
+               if(featuredPlaylists.length === data.playlists.items.length){
+                    return
+               }else {
+                    dispatch({
+                        type: 'setFeaturedPlaylists',
+                        payload: {
+                            playlistPayload: playlistItems.map(playlist=>{
+                                return {
+                                    name: playlist.name,
+                                    description: playlist.description,
+                                    href: playlist.href,
+                                    image: playlist.images[0].url
+                                }
+                            })
                         }
                     })
-                }
-               })
+               }
             },
             function(err){
                 console.error(err)
@@ -108,7 +111,7 @@ export default function HomeHeader() {
                                 return (
                                     <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2' key={playlist.name}>
                                         <div className='flex justify-between items-center'>
-                                            <div className='flex w-[80%]'>
+                                            <div className='flex w-[90%]'>
                                                 <img src={playlist.image} className='h-[64px] rounded-lg'/>
                                                 <div className='ml-2 flex flex-col'>
                                                     <p className='text-[1rem] text-[#d4d1d1] font-semibold'>

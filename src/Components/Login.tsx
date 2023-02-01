@@ -4,13 +4,13 @@ import Home from "./Home";
 
 export default function Login() {
     const redirectUri = 'http://localhost:5173/';
-    const scopes = 'user-library-read user-library-modify';
+    const scopes = 'user-library-read user-library-modify app-remote-control user-top-read';
     const authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}`
     
     
     const [code, setCode] = useState<string | null>(null);
     
-    const { dispatch, isLoggedIn, accessToken, refreshToken } = useContext(AppContext)
+    const { dispatch, isLoggedIn, accessToken } = useContext(AppContext)
     
     const setAccessAndRefreshTokens = (access_token: string, refresh_token: string) => { 
         dispatch({type: 'setAccessAndRefreshTokens', payload: {accessToken: access_token, refreshToken: refresh_token}});
