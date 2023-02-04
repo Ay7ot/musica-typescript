@@ -79,14 +79,15 @@ export default function HomeHeader() {
         verticalSwiping: true,
         autoplay: true,
         speed: 3000,
-        arrows: false
+        arrows: false,
+        zIndex: 0
     }
     
     return (
-        <div className='lg:flex justify-between px-[1px]'>
+        <div className='lg:flex justify-between px-[1px] z-10'>
             <div className='rounded-2xl sm:flex sm lg:w-[60%]'>
                 <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl h-[370px] lg:w-[300px] lg:h-[300px]'/>
-                <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px] lg:relative top-14 xl:top-16'>   
+                <div className='sm:ml-5 sm:pt-[7rem] pt-4 md:max-w-[300px] lg:pt-[4rem]'>   
                     <p className='text-[2rem] md:text-[2.3rem] lg:text-[1.5rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
                     <p className='text-[0.9rem] font-semibold text-[#808080] lg:text-[0.8rem]'>{headerItem.description}</p>
                     <div className='grid grid-cols-2 sm:flex  sm:gap-0 gap-7 justify-between mt-3 sm:px-2 lg:px-0 lg:grid lg:grid-cols-2 lg:gap-1'>
@@ -101,7 +102,7 @@ export default function HomeHeader() {
                     </div>
                 </div>
             </div>
-            <div className='mt-12 lg:mt-0 lg:w-[40%] lg:pl-5'>
+            <div className='mt-12 lg:mt-0 lg:w-[40%] lg:pl-5 z-[1]'>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Featured Playlists</h2>
                 { 
                     width > 1024 ?
@@ -109,7 +110,7 @@ export default function HomeHeader() {
                         {
                             featuredPlaylists.map(playlist => {
                                 return (
-                                    <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2' key={playlist.name}>
+                                    <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2 z-[0]' key={playlist.name}>
                                         <div className='flex justify-between items-center'>
                                             <div className='flex w-[90%]'>
                                                 <img src={playlist.image} className='h-[64px] rounded-lg'/>
@@ -134,7 +135,8 @@ export default function HomeHeader() {
                         }
                     </Slider>
                     :
-                    <Swiper 
+                    <div className='z-[2]'>
+                        <Swiper 
                         spaceBetween={50}
                         slidesPerView={1}
                         modules={[Autoplay]}
@@ -147,33 +149,34 @@ export default function HomeHeader() {
                             }
                         }}
                         loop={true}
-                    >
-                        {featuredPlaylists.map(playlist=>{
-                            return (
-                                <SwiperSlide key={playlist.name}>
-                                    <div className='flex justify-between p-4 h-[310px] bg-[#1A1E1F] rounded-2xl'>
-                                        <div className='w-[80%]'>
-                                            <img 
-                                                src={playlist.image}
-                                                className='w-[150px] rounded-xl'
-                                            />
-                                            <h3 className='text-[1.1rem] text-white font-quicksand mt-4 tracking-wide'>
-                                                {playlist.name}
-                                            </h3>
-                                            <p className='text-[0.88rem] text-[#808080] mt-2'>
-                                                {playlist.description}
-                                            </p>
-                                        </div>
-                                        <div className=''>
-                                            <div className='border-2 p-2 rounded-full'>
-                                                <i className='text-[1.5rem] text-[#afa6a6]'><RiHeart2Fill /></i>
+                        >
+                            {featuredPlaylists.map(playlist=>{
+                                return (
+                                    <SwiperSlide>
+                                        <div className='flex justify-between p-4 h-[280px] bg-[#1A1E1F] rounded-2xl'>
+                                            <div className='w-[80%]'>
+                                                <img 
+                                                    src={playlist.image}
+                                                    className='w-[150px] rounded-xl'
+                                                />
+                                                <h3 className='text-[1.1rem] text-white font-quicksand mt-4 tracking-wide'>
+                                                    {playlist.name}
+                                                </h3>
+                                                <p className='text-[1rem] text-[#808080] mt-2 ellipsis'>
+                                                    {playlist.description}
+                                                </p>
+                                            </div>
+                                            <div className=''>
+                                                <div className='border-[1px] p-2 rounded-full border-[#808080]'>
+                                                    <i className='text-[1.2rem] text-[#afa6a6]'><RiHeart2Fill /></i>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </SwiperSlide>
-                            )
-                        })}
-                    </Swiper>
+                                    </SwiperSlide>
+                                )
+                            })}
+                        </Swiper>
+                    </div>
                 }
             </div>
         </div>

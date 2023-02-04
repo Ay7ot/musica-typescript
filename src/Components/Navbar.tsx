@@ -59,7 +59,7 @@ export default function Navbar() {
                     </nav>
                 </div> 
                 :
-                <nav className='flex items-center justify-between sticky top-0 bg-[#100e0e] py-4'>
+                <nav className='flex items-center justify-between sticky top-0 bg-[#100e0e] py-4 z-[9999]'>
                    <div className='flex items-center sticky top-0'>
                         <div className='h-[0.8rem] flex flex-col justify-between mr-6' onClick={()=>dispatch({type: 'setNavToggled'})}>
                             <div className='bg-[#808080] w-[1.3rem] h-[2px] rounded-sm'></div>
@@ -85,3 +85,4 @@ export default function Navbar() {
         </>
     )
 }
+

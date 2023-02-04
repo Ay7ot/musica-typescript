@@ -7,8 +7,9 @@ import useIcon from '../Hooks/useIcons'
 export default function NavMobile() {
     
     const {dispatch, icons} = useContext(AppContext)
+    
     return (
-        <div>
+        <div className='pt-10'>
            <i onClick={()=>dispatch({type: 'setNavToggled'})} className='text-[#808080] font-extrabold text-[2.5rem]'><BiArrowBack /></i>
            <nav className='mt-10 h-[60vh] flex flex-col justify-between'>
                 {icons.map((icon) => {

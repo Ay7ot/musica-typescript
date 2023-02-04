@@ -88,11 +88,11 @@ export default function HomeBody() {
     return (
         <section className="mt-12 pb-[25%] sm:pb-[15%] lg:pb-[10%] 2xl:pb-[5%]">
             <div>
-                <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Recommended For you</h2>
-                <div className={`overflow-x-scroll no-scrollbar flex gap-20 box-content sm:gap-[180px] md:gap-[70px] lg:gap-[30px] mt-10`}>
+                <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-0'>Recommended For you</h2>
+                <div className={`overflow-x-scroll no-scrollbar flex gap-12 box-content sm:gap-[180px] md:gap-[30px] mt-10 md:mt-4`}>
                         {recommendedPlaylists.map(playlist=>{
                             return (
-                                <div className="w-[150px] lg:w-[200px]" key={playlist.id}>
+                                <div className="w-[200px] lg:w-[200px]" key={playlist.id}>
                                     <img src={playlist.image} className='rounded-xl w-full min-w-[200px]'/>
                                     <p className="text-white font-bold mt-2 tracking-wide">{playlist.name}</p>
                                     <p className="text-gray-100 text-sm">{playlist.artist}</p>
@@ -101,12 +101,12 @@ export default function HomeBody() {
                         })}
                 </div>
             </div>
-            <div>
+            <div className="mt-4">
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Your Playlists</h2>
-                <div className={`overflow-x-scroll no-scrollbar flex gap-20 box-content sm:gap-[180px] md:gap-[70px] lg:gap-[30px] mt-10`}>
+                <div className={`overflow-x-scroll no-scrollbar flex gap-12 box-content sm:gap-[180px] md:gap-[30px] mt-10 md:mt-4`}>
                         {userPlaylist.map(playlist=>{
                             return (
-                                <div className="w-[150px] lg:w-[200px]" key={playlist.id}>
+                                <div className="w-[200px] lg:w-[200px]" key={playlist.id}>
                                     <img src={playlist.image} className='rounded-xl w-full min-w-[200px]'/>
                                     <p className="text-white font-bold mt-2 tracking-wide">{playlist.name}</p>
                                 </div>
