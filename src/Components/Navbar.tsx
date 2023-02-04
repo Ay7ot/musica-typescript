@@ -19,7 +19,7 @@ export default function Navbar() {
     
     return (
         <>
-            { width > 768 ? 
+            { width >= 768 ? 
                 <div className='sticky top-0 py-4 bg-[#100e0e] z-[999999]'>
                     <div className='flex items-center ml-1 lg:ml-4'>
                         <LazyLoadImage 

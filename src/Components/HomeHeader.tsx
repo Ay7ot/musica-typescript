@@ -105,7 +105,7 @@ export default function HomeHeader() {
             <div className='mt-12 lg:mt-0 lg:w-[40%] lg:pl-5 z-[1]'>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-4'>Featured Playlists</h2>
                 { 
-                    width > 1024 ?
+                    width >= 1024 ?
                     <Slider {...slickSettings}>
                         {
                             featuredPlaylists.map(playlist => {

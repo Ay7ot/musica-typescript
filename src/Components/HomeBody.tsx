@@ -33,31 +33,31 @@ export default function HomeBody() {
     }, []);
     
     useEffect(()=>{
-        SpotifyApi.getRecommendations({
-            seed_genres: seedGenre,
-            seed_tracks: seedTracks
-        })
-        .then((data)=>{
-            const recommendedSongs = data.tracks.map(item=>{
-                return {
-                    name: item.name,
-                    id:item.id,
-                    image: item.album.images[0].url,
-                    uri: item.uri,
-                    artist: item.artists[0].name
-                }
+        if(seedGenre.length === 0 && recommendedPlaylists.length === 0){
+            SpotifyApi.getRecommendations({
+                seed_genres: seedGenre,
+                seed_tracks: seedTracks
             })
-           if(seedGenre.length === 0){
+            .then((data)=>{
+                const recommendedSongs = data.tracks.map(item=>{
+                    return {
+                        name: item.name,
+                        id:item.id,
+                        image: item.album.images[0].url,
+                        uri: item.uri,
+                        artist: item.artists[0].name
+                    }
+                })
+               
                 dispatch({
                     type: 'setRecommendedPlaylists',
                     payload: {
                         recommendedPlaylistPayload: recommendedSongs
                     }
                 })
-           }else {
-            return
-           }
-        })
+               
+            })
+        }
     },[seedGenre])
     
     useEffect(()=>{
