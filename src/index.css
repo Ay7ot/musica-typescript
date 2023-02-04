@@ -50,4 +50,12 @@
     /* ... */
     position: relative;
     z-index:0;
-  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    appearance: none !important;
+}
+   
+.no-scrollbar::-webkit-scrollbar-thumb {
+    appearance: none !important;
+}

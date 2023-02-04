@@ -6,7 +6,7 @@ import useIcon from '../Hooks/useIcons'
 
 export default function NavMobile() {
     
-    const {dispatch, icons} = useContext(AppContext)
+    const { dispatch, icons } = useContext(AppContext)
     
     return (
         <div className='pt-10'>
@@ -20,7 +20,6 @@ export default function NavMobile() {
                         </div>
                     )
                 })}
-
            </nav>
         </div>
     )

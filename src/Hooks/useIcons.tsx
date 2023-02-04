@@ -7,7 +7,7 @@ const useIcon = (iconName: string) => {
     switch (iconName) {
         case 'Home':
             return <HiHome />;
-        case 'Collection' :
+        case 'Collections' :
             return <MdFeaturedPlayList />
         case 'Radio':
             return <MdRadio />

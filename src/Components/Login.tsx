@@ -49,7 +49,10 @@ export default function Login() {
                 // store the tokens securely and use them to authenticate requests to the Spotify Web API on behalf of the user
             .catch(error => {
                 console.error(error);
-            });  
+            });
+            
+            const newUrl = window.location.href.replace(/\?code=.*$/, '');
+            window.history.replaceState({}, document.title, newUrl);  
         } else return
     },[code])
     

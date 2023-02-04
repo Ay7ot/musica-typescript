@@ -6,7 +6,7 @@ export const navIcons = [
         id: nanoid()
     },
     {
-        name: "Collection",
+        name: "Collections",
         id: nanoid()
     },
     {
@@ -14,7 +14,7 @@ export const navIcons = [
         id: nanoid()
     },
     {
-        name: "Video",
+        name: "Videos",
         id: nanoid()
     },
     {

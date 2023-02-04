@@ -4,6 +4,7 @@ import Login from "./Components/Login"
 import { ActionInterface, AppContextInterface, IconType } from "./types/Types"
 import { AppContext } from "./Contexts/AppContext"
 import {nanoid} from 'nanoid'
+import Collections from "./Components/Collections"
 
 function App() {
   
@@ -21,7 +22,7 @@ function App() {
         isActive: true
     },
     {
-        name: "Collection",
+        name: "Collections",
         id: nanoid(),
         isActive: false
     },
@@ -142,6 +143,7 @@ function App() {
     <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist}}>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/collections" element={<Collections />} />
       </Routes>
     </AppContext.Provider>
   )
