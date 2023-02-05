@@ -5,6 +5,10 @@ import { ActionInterface, AppContextInterface, IconType } from "./types/Types"
 import { AppContext } from "./Contexts/AppContext"
 import {nanoid} from 'nanoid'
 import Collections from "./Components/Collections"
+import Radio from "./Components/Radio"
+import Videos from "./Components/Videos"
+import Profile from "./Components/Profile"
+import Home from "./Components/Home"
 
 function App() {
   
@@ -67,10 +71,7 @@ function App() {
           isLoggedIn: true
         }
       case 'Logout':
-        return {
-          ...state,
-          isLoggedIn: false,
-        } 
+        return initialState 
       case 'setAccessAndRefreshTokens':
         return {
           ...state,
@@ -143,7 +144,11 @@ function App() {
     <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist}}>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/collections" element={<Collections />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Collections" element={<Collections />} />
+        <Route path="/Radio" element={<Radio />} />
+        <Route path="/Videos" element={<Videos />} />
+        <Route path="/Profile" element={<Profile />} />
       </Routes>
     </AppContext.Provider>
   )

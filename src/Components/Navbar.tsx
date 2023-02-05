@@ -5,6 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import { AppContext } from '../Contexts/AppContext'
 import SpotifyWebApi from 'spotify-web-api-js'
 import useIcon from '../Hooks/useIcons'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
     
@@ -15,6 +16,20 @@ export default function Navbar() {
     function handleSearch(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         // dispatch({type: 'setSearchToggled'})
+    }
+    
+    function navigationFunctionality(id: string){
+        dispatch({
+            type: 'setNavActive',
+            payload: {
+                iconId: id
+            }
+        })
+    }
+    
+    function Logout(){
+        dispatch({type: "Logout"})
+        localStorage.clear()
     }
     
     return (
@@ -42,7 +57,9 @@ export default function Navbar() {
                            {icons.map((icon, index)=>{
                             if(index < 4){
                                 return (
-                                    <i onClick={()=>dispatch({type: 'setNavActive', payload: {iconId: icon.id}})} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
+                                    <Link to={`/${icon.name}`}> 
+                                        <i onClick={()=>navigationFunctionality(icon.id)} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
+                                    </Link>
                                 )
                             }
                            })}
@@ -50,9 +67,17 @@ export default function Navbar() {
                         <div className='bg-[#1D2123] mt-5 px-3 py-6 h-[8rem] flex flex-col justify-between bg-[1A1E1F] rounded-full'>
                             {icons.map((icon, index)=>{
                                 if(index >= 4){
-                                    return (
-                                        <i onClick={()=>dispatch({type: 'setNavActive', payload: {iconId: icon.id}})} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
-                                    )
+                                   if(icon.name === 'Logout'){
+                                        return (
+                                            <i onClick={()=>Logout()} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
+                                        )
+                                   } else {
+                                        return (
+                                            <Link to={`/${icon.name}`}> 
+                                                <i onClick={()=>navigationFunctionality(icon.id)} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
+                                            </Link>
+                                        )
+                                   }
                                 }
                            })}
                         </div>
