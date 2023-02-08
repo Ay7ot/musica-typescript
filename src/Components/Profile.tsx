@@ -19,7 +19,7 @@ export default function Profile() {
             <>
             <Navbar/>
             <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw] sm:mt-4' :'mt-6'}`}>
-              
+              <p className='text-white text-[1.2rem] font-bold '>This page is under Construction</p>
             </section>
             </>
           }
