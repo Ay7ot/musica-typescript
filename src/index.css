@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.searchInput:focus{
+    outline: none;
+}
+
+/* .swiper-slide{
+    display: flex;
+    justify-content: space-between;
+    background-color: #1A1E1F;
+    padding: 1rem;
+    border-radius: 1rem;
+    height: 300px
+}
+
+@media screen and (min-width: 1024) {
+    .swiper-slide{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #1A1E1F;
+        padding: 1rem;
+        border-radius: 1rem;
+        height: 100px
+    }
+} */
+
+.ellipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+}
+
+.slick-slider .slick-list {
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    transform: none !important;
+}
+
+.slick-slide, .slick-slider, .slick-track, .slick-list, .slick-slide-fade {
+    /* ... */
+    position: relative;
+    z-index:0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    appearance: none !important;
+}
+   
+.no-scrollbar::-webkit-scrollbar-thumb {
+    appearance: none !important;
+}
