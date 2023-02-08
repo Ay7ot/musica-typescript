@@ -118,7 +118,7 @@ export default function HomeHeader() {
                                                     <p className='text-[1rem] text-[#d4d1d1] font-semibold'>
                                                         {playlist.name}
                                                     </p>
-                                                    <p className='text-gray-500 text-[12px]'>
+                                                    <p className='text-gray-500 text-[12px] ellipsis'>
                                                         {playlist.description}
                                                     </p>
                                                 </div>
