@@ -10,7 +10,11 @@ export interface AppContextInterface {
     headerItem: mainPlaylistType;
     featuredPlaylists: mainPlaylistType[];
     recommendedPlaylists: recommendedSongType[],
-    userPlaylist: userPlaylistType[]
+    userPlaylist: userPlaylistType[],
+    collections: {
+        isLikedPlaylistActive: boolean,
+        isLikedSongsActive: boolean
+      }
 }
 
 export interface ActionInterface {
