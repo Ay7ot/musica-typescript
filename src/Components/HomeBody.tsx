@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../Contexts/AppContext"
 import SpotifyWebApi from "spotify-web-api-js"
-import { recommendedTracksType } from "../types/Types"
+import { recommendedTracksType, TrackObjectSimplifiedWithAlbum, tracks } from "../types/Types"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
 export default function HomeBody() {
@@ -39,13 +39,15 @@ export default function HomeBody() {
                 seed_tracks: seedTracks
             })
             .then((data)=>{
-                const recommendedSongs = data.tracks.map(item=>{
+                const recommendedSongs = data.tracks.map((item) =>{
+                    const track = item as unknown as tracks;
+                    console.log(track)
                     return {
-                        name: item.name,
-                        id:item.id,
-                        image: item.album.images[0].url,
-                        uri: item.uri,
-                        artist: item.artists[0].name
+                        name: track.name,
+                        id:track.id,
+                        image: track.album.images[0].url,
+                        uri: track.uri,
+                        artist: track.artists[0].name
                     }
                 })
                
