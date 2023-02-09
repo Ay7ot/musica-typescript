@@ -135,6 +135,22 @@ function App() {
           ...state,
           userPlaylist: action.payload.userPlaylistPayload
         }
+      case 'setToLikedPlaylist':
+        return {
+          ...state,
+          collections: {
+            isLikedPlaylistActive: true,
+            isLikedSongsActive: false
+          }
+        }
+      case 'setToLikedSongs':
+        return {
+          ...state,
+          collections: {
+            isLikedPlaylistActive: false,
+            isLikedSongsActive: true
+          }
+        }
       default :
         return state
     }
