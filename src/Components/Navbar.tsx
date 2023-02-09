@@ -75,7 +75,7 @@ export default function Navbar() {
                                         )
                                    } else {
                                         return (
-                                            <Link to={`/${icon.name}`}> 
+                                            <Link to={`/${icon.name}`}  key={icon.name}> 
                                                 <i onClick={()=>navigationFunctionality(icon.id)} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
                                             </Link>
                                         )
