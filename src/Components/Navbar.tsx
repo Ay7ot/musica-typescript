@@ -57,7 +57,7 @@ export default function Navbar() {
                            {icons.map((icon, index)=>{
                             if(index < 4){
                                 return (
-                                    <Link to={`/${icon.name}`}> 
+                                    <Link to={`/${icon.name}`} key={icon.name}> 
                                         <i onClick={()=>navigationFunctionality(icon.id)} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
                                     </Link>
                                 )
@@ -69,7 +69,7 @@ export default function Navbar() {
                                 if(index >= 4){
                                    if(icon.name === 'Logout'){
                                         return (
-                                           <Link to='/'>
+                                           <Link to='/' key={icon.name}>
                                                  <i onClick={()=>Logout()} className={`${icon.isActive? 'text-yellow-300' : 'text-[#595757]'} text-[1.5rem]`} key={icon.id}>{useIcon(icon.name)}</i>
                                            </Link>
                                         )

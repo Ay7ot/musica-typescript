@@ -9,31 +9,27 @@ export default function HomeBody() {
     const [seedGenre, setSeedGenre] = useState<string[]>([])
     const [seedTracks, setSeedTracks] = useState<string[]>([])
     
-    const SpotifyApi = new SpotifyWebApi()
-    SpotifyApi.setAccessToken(localStorage.getItem("access_token"))
+    const { dispatch, recommendedPlaylists, userPlaylist,accessToken } = useContext(AppContext)
     
-    const { dispatch, recommendedPlaylists, userPlaylist } = useContext(AppContext)
+    const SpotifyApi = new SpotifyWebApi()
+     SpotifyApi.setAccessToken(accessToken)
+    
     
     useEffect(() => {
-        // SpotifyApi.getRecommendations({
-        //     seed_genres: SpotifyApi.getUserPlaylists().then(res=>res.items.filter((playlist) => playlist.name.includes('genres')).map((playlist) => playlist.name.split(': ')[1])),
-        //     seed_tracks: SpotifyApi.getMyTopTracks({ limit:5 }).then(data=>data.items.map(track=>track.id)),
-        //     limit: 10
-        // }).then(
-        //     data=>console.log(data)
-        // )
-        SpotifyApi.getUserPlaylists()
+        if(accessToken !== ''){
+            SpotifyApi.getUserPlaylists()
             .then(data=>{
                 setSeedGenre(data.items.filter(playlist=>playlist.name.includes('genres')).map(playlist=>playlist.name.split(': ')[1]))
             })
-        SpotifyApi.getMyTopTracks({ limit:5 })
-            .then(data=>{
+            SpotifyApi.getMyTopTracks({ limit:5 })
+                .then(data=>{
                 setSeedTracks(data.items.map(track=>track.id))
             })
+        }
     }, []);
     
     useEffect(()=>{
-        if(seedGenre.length === 0 && recommendedPlaylists.length === 0){
+        if(seedGenre.length === 0 && recommendedPlaylists.length === 0 && accessToken !== ''){
             SpotifyApi.getRecommendations({
                 seed_genres: seedGenre,
                 seed_tracks: seedTracks
@@ -41,7 +37,6 @@ export default function HomeBody() {
             .then((data)=>{
                 const recommendedSongs = data.tracks.map((item) =>{
                     const track = item as unknown as tracks;
-                    console.log(track)
                     return {
                         name: track.name,
                         id:track.id,
@@ -65,7 +60,6 @@ export default function HomeBody() {
     useEffect(()=>{
         SpotifyApi.getUserPlaylists()
             .then(data=>{
-                console.log(data)
                 const yourPlaylists = data.items.map(item=>{
                     return {
                         name: item.name,

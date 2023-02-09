@@ -12,7 +12,6 @@ import 'swiper/css/autoplay'
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { mainPlaylistType } from '../types/Types';
 
 export default function HomeHeader() {
     const SpotifyApi = new SpotifyWebApi();
@@ -45,6 +44,7 @@ export default function HomeHeader() {
     useEffect(() => {
         SpotifyApi.getFeaturedPlaylists()
             .then(data=>{
+                console.log(data)
                const playlistItems = data.playlists.items
                if(featuredPlaylists.length === data.playlists.items.length){
                     return
