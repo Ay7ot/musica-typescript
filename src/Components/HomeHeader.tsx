@@ -44,7 +44,6 @@ export default function HomeHeader() {
     useEffect(() => {
         SpotifyApi.getFeaturedPlaylists()
             .then(data=>{
-                console.log(data)
                const playlistItems = data.playlists.items
                if(featuredPlaylists.length === data.playlists.items.length){
                     return
