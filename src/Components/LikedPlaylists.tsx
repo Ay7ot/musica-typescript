@@ -1,14 +1,16 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useContext } from "react"
 import { AppContext } from "../Contexts/AppContext"
+import SpotifyWebApi from "spotify-web-api-js"
 
 export default function LikedPLaylists() {
+    const { dispatch, accessToken } = useContext(AppContext)
+    const SpotifyApi = new SpotifyWebApi()
     
-    const { dispatch } = useContext(AppContext)
-
+    
     return (
-        <div>
-           Liked Playlists 
+        <div className="mt-10">
+            Liked Playlists 
         </div>
     )
 }
