@@ -82,7 +82,7 @@ export default function HomeBody() {
     },[])
     
     return (
-        <section className="mt-12 pb-[25%] sm:pb-[15%] lg:pb-[10%] 2xl:pb-[5%]">
+        <section className="mt-12">
             <div>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-0'>Recommended For you</h2>
                 <div className={`overflow-x-scroll no-scrollbar flex gap-12 box-content sm:gap-[100px] md:gap-[30px] mt-10 md:mt-4`}>

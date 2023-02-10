@@ -54,5 +54,6 @@ export const AppContext = createContext<AppContextInterface>({
     collections: {
         isLikedPlaylistActive: true,
         isLikedSongsActive: false
-    }
+    },
+    likedSongs: []
 });

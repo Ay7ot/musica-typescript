@@ -64,7 +64,8 @@ function App() {
     collections: {
       isLikedPlaylistActive: true,
       isLikedSongsActive: false
-    }
+    },
+    likedSongs: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -151,6 +152,11 @@ function App() {
             isLikedSongsActive: true
           }
         }
+      case 'setLikedSongs':
+        return {
+          ...state,
+          likedSongs: action.payload.likedSongPayload
+        }
       default :
         return state
     }
@@ -159,9 +165,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs}}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Home" element={<Home />} />
