@@ -1,4 +1,3 @@
-import React from 'react'
 import NavMobile from './NavMobile'
 import Navbar from './Navbar'
 import useWindowDimensions from '../Hooks/windowDimensions'
