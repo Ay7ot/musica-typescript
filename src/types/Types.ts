@@ -15,7 +15,9 @@ export interface AppContextInterface {
         isLikedPlaylistActive: boolean,
         isLikedSongsActive: boolean
     },
-    likedSongs: songType[]
+    likedSongs: songType[],
+    likedSongLength: number,
+    likedAlbumsAndPlaylist: playlistAndAlbums[]
 }
 
 export interface ActionInterface {
@@ -33,7 +35,9 @@ export interface ActionInterface {
         playlistPayload: mainPlaylistType[],
         recommendedPlaylistPayload: recommendedSongType[],
         userPlaylistPayload: userPlaylistType[],
-        likedSongPayload: songType[]
+        likedSongPayload: songType[],
+        likedSongLengthPayload: number,
+        likedAlbumsAndPlaylistPayload: playlistAndAlbums[]
     }
 }
 
@@ -251,6 +255,14 @@ export type songType = {
     name: string,
     uri: string,
     artist: string,
+    id: string,
+    image: string
+}
+
+export type playlistAndAlbums = {
+    name: string,
+    href: string,
+    artist: string | undefined,
     id: string,
     image: string
 }
