@@ -65,7 +65,9 @@ function App() {
       isLikedPlaylistActive: true,
       isLikedSongsActive: false
     },
-    likedSongs: []
+    likedSongs: [],
+    likedSongLength: 0,
+    likedAlbumsAndPlaylist: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -157,6 +159,20 @@ function App() {
           ...state,
           likedSongs: action.payload.likedSongPayload
         }
+      case 'setLikedSongsLength':
+        return {
+          ...state,
+          likedSongLength: action.payload.likedSongLengthPayload
+        }
+      case 'setlikedAlbumsAndPlaylist':
+        console.log(action.payload.likedAlbumsAndPlaylistPayload)
+        return {
+          ...state,
+          likedAlbumsAndPlaylist: [
+            ...state.likedAlbumsAndPlaylist,
+            ...action.payload.likedAlbumsAndPlaylistPayload
+          ]
+        }
       default :
         return state
     }
@@ -165,9 +181,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist}}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Home" element={<Home />} />

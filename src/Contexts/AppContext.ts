@@ -55,5 +55,7 @@ export const AppContext = createContext<AppContextInterface>({
         isLikedPlaylistActive: true,
         isLikedSongsActive: false
     },
-    likedSongs: []
+    likedSongs: [],
+    likedSongLength: 0,
+    likedAlbumsAndPlaylist: []
 });
