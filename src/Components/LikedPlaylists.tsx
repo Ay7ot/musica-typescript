@@ -36,7 +36,8 @@ export default function LikedPLaylists() {
     
     useEffect(()=>{
                 
-        SpotifyApi.getUserPlaylists()
+        if(likedAlbumsAndPlaylist.length === 0){
+            SpotifyApi.getUserPlaylists()
             .then(data=>{
                 const item =  data.items.map(item=>{
                     return {
@@ -56,6 +57,7 @@ export default function LikedPLaylists() {
             }, function (err){
                 console.error(err)
             })
+        }
     },[])
     
     return (
