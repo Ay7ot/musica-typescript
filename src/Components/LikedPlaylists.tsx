@@ -66,9 +66,9 @@ export default function LikedPLaylists() {
                 {likedAlbumsAndPlaylist.map(item=>{
                     return (
                         <div key={item.id}>
-                        <img src={item.image} className='rounded-lg md:w-[200px]'/>
-                        <p className='mt-4 text-gray-500 font-bold text-[1.1rem]'>{item.name}</p>
-                        <p className='text-gray-700 font-bold'>{item.artist}</p>
+                            <img src={item.image} className='rounded-lg md:w-[200px]'/>
+                            <p className='mt-4 text-gray-500 font-bold text-[0.8rem]'>{item.name}</p>
+                            <p className='text-gray-700 font-bold text-[0.7rem]'>{item.artist}</p>
                         </div>
                     )
                 })}
