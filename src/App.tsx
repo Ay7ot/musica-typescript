@@ -157,7 +157,10 @@ function App() {
       case 'setLikedSongs':
         return {
           ...state,
-          likedSongs: action.payload.likedSongPayload
+          likedSongs: [
+            ...state.likedSongs,
+            ...action.payload.likedSongPayload
+          ]
         }
       case 'setLikedSongsLength':
         return {

@@ -36,26 +36,28 @@ export default function LikedPLaylists() {
     
     useEffect(()=>{
                 
-        SpotifyApi.getUserPlaylists()
-            .then(data=>{
-                const item =  data.items.map(item=>{
-                    return {
-                        name: item.name,
-                        href: item.href,
-                        image: item.images[0].url,
-                        id: item.id,
-                        artist: item.owner.display_name                
-                    }
+        if(likedAlbumsAndPlaylist.length === 0){
+            SpotifyApi.getUserPlaylists()
+                .then(data=>{
+                    const item =  data.items.map(item=>{
+                        return {
+                            name: item.name,
+                            href: item.href,
+                            image: item.images[0].url,
+                            id: item.id,
+                            artist: item.owner.display_name                
+                        }
+                    })
+                    dispatch({
+                        type: 'setlikedAlbumsAndPlaylist',
+                        payload: {
+                            likedAlbumsAndPlaylistPayload: item.filter(playlistorAlbum=>likedAlbumsAndPlaylist.includes(playlistorAlbum) === false)
+                        }
+                    })
+                }, function (err){
+                    console.error(err)
                 })
-                dispatch({
-                    type: 'setlikedAlbumsAndPlaylist',
-                    payload: {
-                        likedAlbumsAndPlaylistPayload: item.filter(playlistorAlbum=>likedAlbumsAndPlaylist.includes(playlistorAlbum) === false)
-                    }
-                })
-            }, function (err){
-                console.error(err)
-            })
+        }
     },[])
     
     return (
