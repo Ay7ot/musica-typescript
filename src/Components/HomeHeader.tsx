@@ -12,6 +12,7 @@ import 'swiper/css/autoplay'
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
 
 export default function HomeHeader() {
     const SpotifyApi = new SpotifyWebApi();
@@ -67,7 +68,14 @@ export default function HomeHeader() {
                 console.error(err)
             }    
         )
-    }, [isLoggedIn])    
+    }, [isLoggedIn]) 
+    
+    function setViewwAlbumNoIcon(){
+        console.log('function fired')
+        dispatch({
+            type: 'setIconNone'
+        })
+    }
     
     const slickSettings = {
         dots: false,
@@ -111,17 +119,19 @@ export default function HomeHeader() {
                                 return (
                                     <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2 z-[0]' key={playlist.name}>
                                         <div className='flex justify-between items-center'>
-                                            <div className='flex w-[90%]'>
-                                                <img src={playlist.image} className='h-[64px] rounded-lg'/>
-                                                <div className='ml-2 flex flex-col'>
-                                                    <p className='text-[1rem] text-[#d4d1d1] font-semibold'>
-                                                        {playlist.name}
-                                                    </p>
-                                                    <p className='text-gray-500 text-[12px] ellipsis'>
-                                                        {playlist.description}
-                                                    </p>
+                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon}>
+                                                <div className='flex w-[90%]'>
+                                                    <img src={playlist.image} className='h-[64px] rounded-lg'/>
+                                                    <div className='ml-2 flex flex-col'>
+                                                        <p className='text-[1rem] text-[#d4d1d1] font-semibold'>
+                                                            {playlist.name}
+                                                        </p>
+                                                        <p className='text-gray-500 text-[12px] ellipsis'>
+                                                            {playlist.description}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                             <div className=''>
                                                 <div className='p-1 rounded-full border-[1px] border-[#808080] text-[#808080] text-[0.9rem]'>
                                                     <i><RiHeart2Fill /></i>
@@ -129,6 +139,7 @@ export default function HomeHeader() {
                                             </div>
                                         </div>
                                     </div>
+                                  
                                 )
                             })
                         }
@@ -153,18 +164,20 @@ export default function HomeHeader() {
                                 return (
                                     <SwiperSlide key={playlist.name}>
                                         <div className='flex justify-between p-4 h-[280px] bg-[#1A1E1F] rounded-2xl'>
-                                            <div className='w-[80%]'>
-                                                <img 
-                                                    src={playlist.image}
-                                                    className='w-[150px] rounded-xl'
-                                                />
-                                                <h3 className='text-[1.1rem] text-white font-quicksand mt-4 tracking-wide'>
-                                                    {playlist.name}
-                                                </h3>
-                                                <p className='text-[1rem] text-[#808080] mt-2 ellipsis'>
-                                                    {playlist.description}
-                                                </p>
+                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon}>
+                                                <div className='w-[80%]'>
+                                                    <img 
+                                                        src={playlist.image}
+                                                        className='w-[150px] rounded-xl'
+                                                    />
+                                                    <h3 className='text-[1.1rem] text-white font-quicksand mt-4 tracking-wide'>
+                                                        {playlist.name}
+                                                    </h3>
+                                                    <p className='text-[1rem] text-[#808080] mt-2 ellipsis'>
+                                                        {playlist.description}
+                                                    </p>
                                             </div>
+                                            </Link>
                                             <div className=''>
                                                 <div className='border-[1px] p-2 rounded-full border-[#808080]'>
                                                     <i className='text-[1.2rem] text-[#afa6a6]'><RiHeart2Fill /></i>

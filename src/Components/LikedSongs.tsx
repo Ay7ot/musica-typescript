@@ -30,7 +30,6 @@ export default function LikedSongs() {
       const retrieveTracks = () => {
         SpotifyApi.getMySavedTracks({ limit: 50, offset: offset })
           .then(data => {
-            console.log({ data: data, length: data.total });
             const likedSongsData = data.items.map(item => {
               return {
                 name: item.track.name,

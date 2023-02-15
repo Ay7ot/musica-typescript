@@ -30,6 +30,6 @@ export default function Collections() {
             </section>
             </>
           }
-    </div>
-      )
+        </div>
+    )
 }

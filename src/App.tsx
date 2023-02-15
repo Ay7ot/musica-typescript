@@ -9,6 +9,7 @@ import Radio from "./Components/Radio"
 import Videos from "./Components/Videos"
 import Profile from "./Components/Profile"
 import Home from "./Components/Home"
+import ViewAlbumPlaylist from "./Components/ViewAlbumPlaylist"
 
 function App() {
   
@@ -113,6 +114,16 @@ function App() {
           ...state,
           icons: newIcons
         }
+      case 'setIconNone': 
+        return {
+          ...state,
+          icons: state.icons.map(icon=>{
+            return {
+              ...icon,
+              isActive: false
+            }
+          })
+        }
       case 'setHeaderMain':
         return {
           ...state,
@@ -194,6 +205,7 @@ function App() {
         <Route path="/Radio" element={<Radio />} />
         <Route path="/Videos" element={<Videos />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/viewAlbum" element={<ViewAlbumPlaylist />} />
       </Routes>
     </AppContext.Provider>
   )
