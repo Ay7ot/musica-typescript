@@ -114,7 +114,7 @@ function App() {
           ...state,
           icons: newIcons
         }
-      case 'setIconNone': 
+        case 'setIconNone': 
         return {
           ...state,
           icons: state.icons.map(icon=>{

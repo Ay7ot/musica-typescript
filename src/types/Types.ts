@@ -41,38 +41,11 @@ export interface ActionInterface {
     }
 }
 
-export type IconType =  [
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    },
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    },
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    },
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    },
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    },
-    {
-        name: string,
-        id: string,
-        isActive: boolean
-    }
-]
+export type IconType =  {
+    name: string;
+    isActive: boolean;
+    id: string
+}[]
 
 export type mainPlaylistType = {
     image: string;
