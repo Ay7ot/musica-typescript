@@ -68,7 +68,8 @@ function App() {
     },
     likedSongs: [],
     likedSongLength: 0,
-    likedAlbumsAndPlaylist: []
+    likedAlbumsAndPlaylist: [],
+    playlistTracks: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -195,9 +196,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks} = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks}}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Home" element={<Home />} />

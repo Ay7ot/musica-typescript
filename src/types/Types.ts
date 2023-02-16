@@ -17,7 +17,8 @@ export interface AppContextInterface {
     },
     likedSongs: songType[],
     likedSongLength: number,
-    likedAlbumsAndPlaylist: playlistAndAlbums[]
+    likedAlbumsAndPlaylist: playlistAndAlbums[],
+    playlistTracks: trackType[]
 }
 
 export interface ActionInterface {
@@ -230,6 +231,15 @@ export type songType = {
     artist: string,
     id: string,
     image: string
+}
+
+export type trackType = {
+    name: string,
+    uri: string,
+    artist: string,
+    id: string,
+    image: string,
+    duration: number
 }
 
 export type playlistAndAlbums = {

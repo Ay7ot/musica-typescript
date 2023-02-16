@@ -1,13 +1,12 @@
 import {useContext} from 'react'
-import { useLocation } from "react-router-dom"
 import NavMobile from "./NavMobile"
 import Navbar from "./Navbar"
 import useWindowDimensions from "../Hooks/windowDimensions"
 import { AppContext } from "../Contexts/AppContext"
-import App from '../App'
+import AlbumComponent from './AlbumComponent'
+
 
 export default function ViewAlbumPlaylist(){
-    const location = useLocation()
     const { navToggled } = useContext(AppContext)
     const {width} = useWindowDimensions()
     
@@ -20,7 +19,7 @@ export default function ViewAlbumPlaylist(){
             <>
             <Navbar/>
             <section className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw] sm:mt-4 ' :'mt-6'}`}>
-              hello world
+              <AlbumComponent />
             </section>
             </>
           }

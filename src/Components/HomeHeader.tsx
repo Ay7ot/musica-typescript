@@ -53,11 +53,13 @@ export default function HomeHeader() {
                         type: 'setFeaturedPlaylists',
                         payload: {
                             playlistPayload: playlistItems.map(playlist=>{
-                                return {
-                                    name: playlist.name,
-                                    description: playlist.description,
-                                    href: playlist.href,
-                                    image: playlist.images[0].url
+                                if(playlist.description){
+                                    return {
+                                        name: playlist.name,
+                                        description: playlist.description.split('\n')[0],
+                                        href: playlist.href,
+                                        image: playlist.images[0].url
+                                    }
                                 }
                             })
                         }
@@ -71,7 +73,6 @@ export default function HomeHeader() {
     }, [isLoggedIn]) 
     
     function setViewwAlbumNoIcon(){
-        console.log('function fired')
         dispatch({
             type: 'setIconNone'
         })
@@ -119,7 +120,7 @@ export default function HomeHeader() {
                                 return (
                                     <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2 z-[0]' key={playlist.name}>
                                         <div className='flex justify-between items-center'>
-                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon}>
+                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon} state={playlist}>
                                                 <div className='flex w-[90%]'>
                                                     <img src={playlist.image} className='h-[64px] rounded-lg'/>
                                                     <div className='ml-2 flex flex-col'>
@@ -164,7 +165,7 @@ export default function HomeHeader() {
                                 return (
                                     <SwiperSlide key={playlist.name}>
                                         <div className='flex justify-between p-4 h-[280px] bg-[#1A1E1F] rounded-2xl'>
-                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon}>
+                                            <Link to='/viewAlbum' onClick={setViewwAlbumNoIcon} state={playlist}>
                                                 <div className='w-[80%]'>
                                                     <img 
                                                         src={playlist.image}
