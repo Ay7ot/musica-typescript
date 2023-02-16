@@ -31,7 +31,8 @@ export default function HomeHeader() {
                         namePayload: neededPlaylistInfo.name,
                         hrefPayload: neededPlaylistInfo.href,
                         descriptionPayload: neededPlaylistInfo.description,
-                        imagePayload: neededPlaylistInfo.images[0].url
+                        imagePayload: neededPlaylistInfo.images[0].url,
+                        idPayload: neededPlaylistInfo.id
                     }
                 });
             },
@@ -58,7 +59,8 @@ export default function HomeHeader() {
                                         name: playlist.name,
                                         description: playlist.description.split('\n')[0],
                                         href: playlist.href,
-                                        image: playlist.images[0].url
+                                        image: playlist.images[0].url,
+                                        id: playlist.id
                                     }
                                 }
                             })

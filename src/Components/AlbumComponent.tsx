@@ -1,36 +1,49 @@
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { playlistAndAlbums, mainPlaylistType, userPlaylistType } from '../types/Types'
 import { FaEllipsisV } from "react-icons/fa"
 import useWindowDimensions from "../Hooks/windowDimensions"
+import SpotifyWebApi from "spotify-web-api-js"
+import { AppContext } from "../Contexts/AppContext"
+
 
 export default function AlbumComponent() {
-  
+
   const {width} = useWindowDimensions()
   const location = useLocation()
-  const data: playlistAndAlbums | mainPlaylistType | userPlaylistType | playlistAndAlbums  = location.state
+  const data:  mainPlaylistType | userPlaylistType | playlistAndAlbums  = location.state
+  const {dispatch, playlistTracks, accessToken} = useContext(AppContext)
+    
+  const SpotifyApi = new SpotifyWebApi()
+  SpotifyApi.setAccessToken(accessToken)
   
   useEffect(()=>{
-    console.log('useEffect ran')
+    SpotifyApi.getPlaylistTracks(data.id)
+    .then(data =>{
+      console.log(data)
+    }, 
+    function(err){
+      console.error(err)
+    })
   },[])
   
   return (
     <div>
-      <img src={data.image} className='rounded-xl h-[350px] w-full max-w-[350px]'/>
+      {/* <img src={data.image} className='rounded-xl h-[350px] w-full max-w-[350px]'/>
       <div className='lg:ml-7 lg:mt-[80px]'>
         <div className='lg:w-[500px]'>
-            <h2 className='text-[#A4C7C6] text-[32px] font-bold mt-6'>{data.name}</h2>
-            <p className='text-gray-dark text-sm'>{data.description}</p>
-            <p className='text-gray-dark text-sm mt-3'>{tracks.length} Songs - 16 Hours</p>
+          <h2 className='text-[#A4C7C6] text-[32px] font-bold mt-6'>{data.name}</h2>
+          <p className='text-gray-dark text-sm'>{data.description}</p>
+          <p className='text-gray-dark text-sm mt-3'>{tracks.length} Songs - 16 Hours</p>
         </div>
         <div className='flex justify-between mt-6 md:w-[500px] lg:w-[400px]'>
             <div className='flex items-center cursor-pointer bg-[#424547] rounded-full px-[15px] py-[10px]'>
-                <img src='playActive.png' className='mr-2'/>
-                <p className='text-white text-xs'>Play all</p>
+              <img src='playActive.png' className='mr-2'/>
+              <p className='text-white text-xs'>Play all</p>
             </div>
             <div className='flex items-center cursor-pointer bg-[#424547] rounded-full px-[15px] py-[10px]'>
-                <img src='addCollection.png' className='mr-2'/>
-                <p className='text-white text-xs'>Add to Collection</p>
+              <img src='addCollection.png' className='mr-2'/>
+              <p className='text-white text-xs'>Add to Collection</p>
             </div>
             <div className='flex items-center cursor-pointer bg-[#424547] rounded-full px-[15px] py-[10px]'>
                 <img src='unlikedAlbum.png' className='mr-2'/>
@@ -81,7 +94,7 @@ export default function AlbumComponent() {
               )
           })}
         </div>
-      }
+      } */}
     </div>
   )
 }

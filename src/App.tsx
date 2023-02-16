@@ -57,7 +57,8 @@ function App() {
       name: '',
       image:'',
       href: '',
-      description: ''
+      description: '',
+      id: ''
     },
     featuredPlaylists: [],
     recommendedPlaylists: [],
@@ -132,7 +133,8 @@ function App() {
             image: action.payload.imagePayload,
             name: action.payload.namePayload,
             href: action.payload.hrefPayload,
-            description: action.payload.descriptionPayload
+            description: action.payload.descriptionPayload,
+            id: action.payload.idPayload
           }
         }
       case 'setFeaturedPlaylists': 
@@ -180,13 +182,17 @@ function App() {
           likedSongLength: action.payload.likedSongLengthPayload
         }
       case 'setlikedAlbumsAndPlaylist':
-        console.log(action.payload.likedAlbumsAndPlaylistPayload)
         return {
           ...state,
           likedAlbumsAndPlaylist: [
             ...state.likedAlbumsAndPlaylist,
             ...action.payload.likedAlbumsAndPlaylistPayload
           ]
+        }
+      case 'setPlaylistTracks':
+        return {
+          ...state,
+          playlistTracks: action.payload.playlistTracksPayload
         }
       default :
         return state

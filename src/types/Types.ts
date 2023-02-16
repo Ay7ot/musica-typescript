@@ -32,13 +32,15 @@ export interface ActionInterface {
         hrefPayload: string;
         namePayload: string;
         imagePayload: string;
+        idPayload: string;
         descriptionPayload: string;
         playlistPayload: mainPlaylistType[],
         recommendedPlaylistPayload: recommendedSongType[],
         userPlaylistPayload: userPlaylistType[],
         likedSongPayload: songType[],
         likedSongLengthPayload: number,
-        likedAlbumsAndPlaylistPayload: playlistAndAlbums[]
+        likedAlbumsAndPlaylistPayload: playlistAndAlbums[],
+        playlistTracksPayload: trackType[]
     }
 }
 
@@ -52,7 +54,8 @@ export type mainPlaylistType = {
     image: string;
     name: string;
     href: string;
-    description: string | null
+    description: string | null,
+    id: string
 }
 
 export type recommendedSongType = {
