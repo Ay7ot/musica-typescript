@@ -123,7 +123,7 @@ export default function AlbumComponent() {
                 return (
                     <div className='flex items-center justify-between bg-[#2c2f31] p-2 rounded-xl mb-4' key={item.id}>
                         <div className='flex items-center'>
-                            <img src={item.image} className='w-[40px] h-[40px] rounded-lg'/>
+                            <img src={item.image} className='min-w-[40px] h-[40px] rounded-lg'/>
                             <img src='trackHeart.png' className='hidden lg:block ml-5'/>
                         </div>
                         <div className='w-[300px] 2xl:w-[500px] flex justify-between'>
@@ -131,7 +131,7 @@ export default function AlbumComponent() {
                           <p className='text-xs lg:text-sm text-white font-thin tracking-wider'>{item.artist}</p>
                         </div>
                         <div className='flex items-center lg:flex-row-reverse lg:items-center'>
-                            <i className='text-yellow mb-[6px]'><FaEllipsisV /></i>
+                            <i className='text-yellow-500 mb-[6px]'><FaEllipsisV /></i>
                             <p className='text-sm font-thin text-white mr-20'>{(item.duration / 1000 / 60).toFixed(2)}</p>
                         </div>
                     </div>
@@ -152,7 +152,7 @@ export default function AlbumComponent() {
                           </div>
                       </div>
                       <div className='flex-col flex items-center'>
-                          <i className='text-yellow mb-[6px]'><FaEllipsisV /></i>
+                          <i className='text-yellow-500  mb-[6px]'><FaEllipsisV /></i>
                           <p className='text-sm font-thin text-white'>{(item.duration / 1000 / 60).toFixed(2)}</p>
                       </div>
                   </div>
