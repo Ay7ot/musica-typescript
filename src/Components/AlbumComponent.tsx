@@ -19,13 +19,10 @@ export default function AlbumComponent() {
   
   useEffect(()=>{
     if(data.type === 'playlist' && playlistTracks.length === 0){
-      const albumImage = data.image
-
       let offset = 0
       const retrieveTracks = () => {
         SpotifyApi.getPlaylistTracks(data.id, {offset: offset})
         .then(data =>{
-          console.log(data)
           const dataItems = data.items.map(item=>{
             const neededItem = item.track as unknown as playlistTrackType
             return {
@@ -55,7 +52,7 @@ export default function AlbumComponent() {
       };
       retrieveTracks()
     } 
-    else if(data.type === 'album' && playlistTracks.length===0){
+    else if(data.type === 'album' && playlistTracks.length === 0){
       const albumImage = data.image
       let offset = 0
       const retrieveTracks = () => {
@@ -98,7 +95,10 @@ export default function AlbumComponent() {
       <div className='lg:ml-7 lg:mt-[80px]'>
         <div className='lg:w-[500px]'>
           <h2 className='text-[#A4C7C6] text-[32px] font-bold mt-6'>{data.name}</h2>
-          {data.description  && <p className='text-gray-400 text-sm'>{data.description}</p>}
+          {
+            //@ts-ignore
+            data.description  && <p className='text-gray-400 text-sm'>{data.description}</p>
+          }
           <p className='text-gray-500 text-sm mt-3'>{playlistTracks.length} Songs - 16 Hours</p>
         </div>
         <div className='flex justify-between mt-6 md:w-[500px] lg:w-[400px]'>

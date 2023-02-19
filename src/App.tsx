@@ -199,6 +199,11 @@ function App() {
             ...action.payload.playlistTracksPayload
           ]
         }
+      case 'setPlaylistTracksNone':
+        return {
+          ...state,
+          playlistTracks: []
+        }
       default :
         return state
     }
