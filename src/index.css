@@ -8,26 +8,14 @@
     outline: none;
 }
 
-/* .swiper-slide{
-    display: flex;
-    justify-content: space-between;
-    background-color: #1A1E1F;
-    padding: 1rem;
-    border-radius: 1rem;
-    height: 300px
+.ellipsis1{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px; 
 }
-
-@media screen and (min-width: 1024) {
-    .swiper-slide{
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #1A1E1F;
-        padding: 1rem;
-        border-radius: 1rem;
-        height: 100px
-    }
-} */
 
 .ellipsis {
     display: -webkit-box;

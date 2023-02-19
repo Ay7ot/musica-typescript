@@ -6,6 +6,7 @@ import useWindowDimensions from "../Hooks/windowDimensions"
 import SpotifyWebApi from "spotify-web-api-js"
 import { AppContext } from "../Contexts/AppContext"
 import { RiPlayListAddFill, RiPlayCircleFill, RiHeart2Fill } from 'react-icons/ri'
+import { LazyLoadImage } from "react-lazy-load-image-component"
 
 export default function AlbumComponent() {
 
@@ -123,7 +124,7 @@ export default function AlbumComponent() {
                 return (
                     <div className='flex items-center justify-between bg-[#2c2f31] p-2 rounded-xl mb-4' key={item.id}>
                         <div className='flex items-center'>
-                            <img src={item.image} className='w-[40px] h-[40px] rounded-lg'/>
+                            <LazyLoadImage src={item.image} className='w-[40px] h-[40px] rounded-lg'/>
                             <img src='trackHeart.png' className='hidden lg:block ml-5'/>
                         </div>
                         <div className='w-[300px] 2xl:w-[500px] flex justify-between'>
@@ -147,7 +148,7 @@ export default function AlbumComponent() {
                               <img src={item.image} className='w-[40px] h-[40px] rounded-lg'/>
                           </div>
                           <div className='ml-3 flex flex-col'>
-                              <p className='text-sm text-white font-thin tracking-wide mb-[6px]'>{item.name}</p>
+                              <p className='text-sm text-white font-thin tracking-wide mb-[6px] ellipsis1'>{item.name}</p>
                               <p className='text-xs text-white font-thin tracking-wider'>{item.artist}</p>
                           </div>
                       </div>
