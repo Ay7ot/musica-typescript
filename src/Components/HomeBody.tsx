@@ -65,7 +65,8 @@ export default function HomeBody() {
                         name: item.name,
                         id:item.id,
                         image: item.images[0].url,
-                        uri: item.uri
+                        uri: item.uri,
+                        type: 'playlist'
                     }
                 })
                 dispatch({

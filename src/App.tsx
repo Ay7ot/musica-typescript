@@ -58,7 +58,8 @@ function App() {
       image:'',
       href: '',
       description: '',
-      id: ''
+      id: '',
+      type: ''
     },
     featuredPlaylists: [],
     recommendedPlaylists: [],
@@ -134,7 +135,8 @@ function App() {
             name: action.payload.namePayload,
             href: action.payload.hrefPayload,
             description: action.payload.descriptionPayload,
-            id: action.payload.idPayload
+            id: action.payload.idPayload,
+            type: 'playlist'
           }
         }
       case 'setFeaturedPlaylists': 
@@ -192,7 +194,10 @@ function App() {
       case 'setPlaylistTracks':
         return {
           ...state,
-          playlistTracks: action.payload.playlistTracksPayload
+          playlistTracks: [
+            ...state.playlistTracks,
+            ...action.payload.playlistTracksPayload
+          ]
         }
       default :
         return state

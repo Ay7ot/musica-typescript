@@ -19,7 +19,8 @@ export default function LikedPLaylists() {
                         href: item.album.href,
                         image: item.album.images[0].url,
                         id: item.album.id,
-                        artist: item.album.artists[0].name                
+                        artist: item.album.artists[0].name,
+                        type: 'album'               
                     } 
                 })
                 dispatch({
@@ -45,7 +46,8 @@ export default function LikedPLaylists() {
                         href: item.href,
                         image: item.images[0].url,
                         id: item.id,
-                        artist: item.owner.display_name                
+                        artist: item.owner.display_name ,
+                        type: 'playlist'               
                     }
                 })
                 dispatch({
@@ -60,19 +62,13 @@ export default function LikedPLaylists() {
         }
     },[])
     
-    function setViewwAlbumNoIcon(){
-        dispatch({
-            type: 'setIconNone'
-        })
-    }
-    
     return (
         <div className='mt-6 px-[1px]'>
             <div className='grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
                 {likedAlbumsAndPlaylist.map(item=>{
                     return (
                         <div key={item.id}>
-                            <Link to='/viewAlbum' state={item} onClick={setViewwAlbumNoIcon}>
+                            <Link to='/viewAlbum' state={item} onClick={()=>dispatch({type: 'setIconNone'})}>
                                 <img src={item.image} className='rounded-lg md:w-[200px]'/>
                                 <p className='mt-4 text-gray-500 font-bold text-[0.8rem]'>{item.name}</p>
                                 <p className='text-gray-700 font-bold text-[0.7rem]'>{item.artist}</p>
