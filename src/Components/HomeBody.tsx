@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../Contexts/AppContext"
 import SpotifyWebApi from "spotify-web-api-js"
-import { recommendedTracksType, TrackObjectSimplifiedWithAlbum, tracks } from "../types/Types"
-import { LazyLoadImage } from "react-lazy-load-image-component"
+import { tracks } from "../types/Types"
+import { Link } from "react-router-dom"
 
 export default function HomeBody() {
     
@@ -82,6 +82,15 @@ export default function HomeBody() {
             })
     },[])
     
+    function setPlaylistTracks(){
+        dispatch({
+            type: 'setPlaylistTracksNone'
+        })
+        dispatch({
+            type: 'setIconNone'
+        })
+    }
+    
     return (
         <section className="mt-12">
             <div>
@@ -104,8 +113,10 @@ export default function HomeBody() {
                         {userPlaylist.map(playlist=>{
                             return (
                                 <div className="w-[200px] lg:w-[200px]" key={playlist.id}>
-                                    <img src={playlist.image} className='rounded-xl w-full min-w-[200px]'/>
+                                   <Link to='/viewAlbum' state={playlist} onClick={setPlaylistTracks}>
+                                   <img src={playlist.image} className='rounded-xl w-full min-w-[200px]'/>
                                     <p className="text-white font-bold mt-2 tracking-wide">{playlist.name}</p>
+                                   </Link>
                                 </div>
                             )
                         })}

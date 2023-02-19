@@ -75,6 +75,15 @@ export default function HomeHeader() {
         )
     }, [isLoggedIn])
     
+    function setPlaylistTracks(){
+        dispatch({
+            type: 'setPlaylistTracksNone'
+        })
+        dispatch({
+            type: 'setIconNone'
+        })
+    }
+    
     const slickSettings = {
         dots: false,
         infinite: true,
@@ -117,7 +126,7 @@ export default function HomeHeader() {
                                 return (
                                     <div className='h-[80px] bg-[#1A1E1F] rounded-2xl p-2 mb-2 z-[0]' key={playlist.name}>
                                         <div className='flex justify-between items-center'>
-                                            <Link to='/viewAlbum' onClick={()=>dispatch({type: 'setIconNone'})} state={playlist}>
+                                            <Link to='/viewAlbum' onClick={setPlaylistTracks} state={playlist}>
                                                 <div className='flex w-[90%]'>
                                                     <img src={playlist.image} className='h-[64px] rounded-lg'/>
                                                     <div className='ml-2 flex flex-col'>
@@ -162,7 +171,7 @@ export default function HomeHeader() {
                                 return (
                                     <SwiperSlide key={playlist.name}>
                                         <div className='flex justify-between p-4 h-[280px] bg-[#1A1E1F] rounded-2xl'>
-                                            <Link to='/viewAlbum' onClick={()=>dispatch({type: 'setIconNone'})} state={playlist}>
+                                            <Link to='/viewAlbum' onClick={setPlaylistTracks} state={playlist}>
                                                 <div className='w-[80%]'>
                                                     <img 
                                                         src={playlist.image}
