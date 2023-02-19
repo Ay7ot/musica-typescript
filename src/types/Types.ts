@@ -18,7 +18,8 @@ export interface AppContextInterface {
     likedSongs: songType[],
     likedSongLength: number,
     likedAlbumsAndPlaylist: playlistAndAlbums[],
-    playlistTracks: trackType[]
+    playlistTracks: trackType[],
+    uris: string[]
 }
 
 export interface ActionInterface {
@@ -40,7 +41,8 @@ export interface ActionInterface {
         likedSongPayload: songType[],
         likedSongLengthPayload: number,
         likedAlbumsAndPlaylistPayload: playlistAndAlbums[],
-        playlistTracksPayload: trackType[]
+        playlistTracksPayload: trackType[],
+        urisPayload: string[]
     }
 }
 
