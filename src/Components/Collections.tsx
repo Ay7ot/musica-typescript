@@ -8,8 +8,8 @@ import LikedSongs from './LikedSongs'
 import PlayerControl from './PlayerControl'
 
 export default function Collections() {
+  
     const {width} = useWindowDimensions()
-    
     const { navToggled, collections, dispatch } = useContext(AppContext)
     
     return (
