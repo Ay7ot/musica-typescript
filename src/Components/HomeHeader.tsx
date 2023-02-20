@@ -101,7 +101,7 @@ export default function HomeHeader() {
         <div className='lg:flex justify-between px-[1px] z-10'>
             <div className='rounded-2xl sm:flex sm lg:w-[60%]'>
                 <LazyLoadImage src={headerItem.image} className='object-fill rounded-2xl w-full h-[350px] max-w-[350px] lg:w-[300px] lg:h-[300px]'/>
-                <div className='sm:ml-5 sm:pt-[10.5rem] pt-4 md:max-w-[300px] lg:pt-[7rem] xl:pt-[12rem]'>   
+                <div className='sm:ml-5 sm:pt-[10.5rem] pt-4 md:max-w-[300px] lg:pt-[7rem] xl:pt-[11rem]'>   
                     <p className='text-[2rem] md:text-[2.3rem] lg:text-[1.5rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
                     <p className='text-[0.9rem] font-semibold text-[#808080] lg:text-[0.8rem]'>{headerItem.description}</p>
                     <div className='grid grid-cols-2 sm:flex sm:gap-0 gap-7 justify-between mt-3 sm:px-2 md:px-0 lg:grid lg:grid-cols-2 lg:gap-1'>
