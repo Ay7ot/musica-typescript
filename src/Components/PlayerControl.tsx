@@ -4,10 +4,10 @@ import SpotifyPlayer from 'react-spotify-web-playback'
 
 export default function PlayerControl() {
       
-  const { dispatch, accessToken, uris } = useContext(AppContext)
+  const { dispatch, accessToken, uris, navToggled } = useContext(AppContext)
    
     return (
-      <div className="fixed bottom-0 w-full backdrop-blur-md z-[999999] p-3">      
+      <div className={`fixed bottom-0 w-full backdrop-blur-md z-[999999] p-3 ${navToggled ? 'invisible' : ''}`}>      
         <SpotifyPlayer 
           token={accessToken}
           showSaveIcon
@@ -19,7 +19,7 @@ export default function PlayerControl() {
             trackNameColor: '#EFEEE0'
           }}
           autoPlay={false}
-          play={true}
+          play={false}
           uris={uris}
         />
     </div>
