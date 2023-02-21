@@ -17,7 +17,7 @@ export default function Home() {
   
   useEffect(() => {
     if(uris.length === 0){
-      SpotifyApi.getMyRecentlyPlayedTracks()
+      SpotifyApi.getMyRecentlyPlayedTracks({limit: 50})
         .then(data=>{
           const uriData = data.items.map(item=>{
             return item.track.uri
@@ -51,7 +51,6 @@ export default function Home() {
         </>
       }
     </div>
-    {/* {!navToggled && <PlayerControl />} */}
     </>
   )
 }
