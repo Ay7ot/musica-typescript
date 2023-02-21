@@ -9,7 +9,7 @@ export default function HomeBody() {
     const [seedGenre, setSeedGenre] = useState<string[]>([])
     const [seedTracks, setSeedTracks] = useState<string[]>([])
     
-    const { dispatch, recommendedPlaylists, userPlaylist,accessToken } = useContext(AppContext)
+    const { dispatch, recommendedPlaylists, userPlaylist, accessToken } = useContext(AppContext)
     
     const SpotifyApi = new SpotifyWebApi()
      SpotifyApi.setAccessToken(accessToken)

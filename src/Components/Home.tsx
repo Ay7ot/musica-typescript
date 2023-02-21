@@ -37,7 +37,7 @@ export default function Home() {
   
   return (
     <>
-    <div className="bg-[#100e0e] min-h-screen p-6 pt-0 font-quicksand w-full  pb-[25%] sm:pb-[15%] lg:pb-[10%] 2xl:pb-[5%]">
+    <div className="bg-[#100e0e] min-h-screen p-6 pt-0 font-quicksand w-full pb-[25%] sm:pb-[15%] lg:pb-[5%] 2xl:pb-[5%]">
       {navToggled ? 
         <>
           <NavMobile />
