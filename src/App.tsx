@@ -10,6 +10,7 @@ import Videos from "./Components/Videos"
 import Profile from "./Components/Profile"
 import Home from "./Components/Home"
 import ViewAlbumPlaylist from "./Components/ViewAlbumPlaylist"
+import PlayerControl from "./Components/PlayerControl"
 
 function App() {
   
@@ -230,6 +231,7 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/viewAlbum" element={<ViewAlbumPlaylist />} />
       </Routes>
+      {isLoggedIn && <PlayerControl />}
     </AppContext.Provider>
   )
 }

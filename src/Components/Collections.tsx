@@ -33,7 +33,7 @@ export default function Collections() {
           </>
         }
       </div>
-      {!navToggled && <PlayerControl />}
+      {/* {!navToggled && <PlayerControl />} */}
       </>
     )
 }

@@ -51,7 +51,7 @@ export default function Home() {
         </>
       }
     </div>
-    {!navToggled && <PlayerControl />}
+    {/* {!navToggled && <PlayerControl />} */}
     </>
   )
 }

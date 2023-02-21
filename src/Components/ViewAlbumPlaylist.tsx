@@ -26,7 +26,7 @@ export default function ViewAlbumPlaylist(){
         </>
       }
     </div>
-    {!navToggled && <PlayerControl />}
+    {/* {!navToggled && <PlayerControl />} */}
     </>
   )
 }
