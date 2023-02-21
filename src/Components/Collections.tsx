@@ -14,7 +14,7 @@ export default function Collections() {
     
     return (
       <>
-      <div className="bg-[#100e0e] min-h-screen p-6 pt-0 font-quicksand w-full  pb-[25%] sm:pb-[15%] lg:pb-[7%]">
+      <div className="bg-[#100e0e] min-h-screen p-6 pt-0 font-quicksand w-full pb-[150px] sm:pb-[20%] lg:pb-[7%]">
         {navToggled ? 
           <>
             <NavMobile />
@@ -33,7 +33,6 @@ export default function Collections() {
           </>
         }
       </div>
-      {/* {!navToggled && <PlayerControl />} */}
       </>
     )
 }
