@@ -3,7 +3,7 @@ import { AppContext } from "../Contexts/AppContext"
 import Home from "./Home";
 
 export default function Login() {
-    const redirectUri = 'http://dot-musica.netlify.app/';
+    const redirectUri = 'https://dot-musica.netlify.app/';
     const scopes = 'user-library-read user-library-modify app-remote-control user-top-read streaming user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played user-read-email user-read-private';
     const authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}`
     
