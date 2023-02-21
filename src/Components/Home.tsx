@@ -5,7 +5,6 @@ import NavMobile from "./NavMobile"
 import useWindowDimensions from "../Hooks/windowDimensions"
 import HomeHeader from "./HomeHeader"
 import HomeBody from "./HomeBody"
-import PlayerControl from "./PlayerControl"
 import SpotifyWebApi from "spotify-web-api-js"
 
 export default function Home() {

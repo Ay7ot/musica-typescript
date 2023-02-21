@@ -95,14 +95,17 @@ export default function HomeBody() {
         <section className="mt-12">
             <div>
                 <h2 className='font-bold font-quicksand text-[#808080] text-xl mb-0'>Recommended For you</h2>
-                <div className={`overflow-x-scroll no-scrollbar flex gap-5 box-content sm:gap-[100px] md:gap-[30px] mt-10 md:mt-4`}>
+                <div className={`overflow-x-scroll no-scrollbar flex gap-5 box-content sm:gap-[50px] md:gap-[30px] mt-10 md:mt-4`}>
                         {recommendedPlaylists.map(playlist=>{
                             return (
-                                <div className="w-[200px] lg:w-[200px]" key={playlist.id}>
-                                    <img src={playlist.image} className='rounded-xl w-full min-w-[200px]'/>
-                                    <p className="text-white font-bold mt-2 tracking-wide">{playlist.name}</p>
-                                    <p className="text-gray-100 text-sm">{playlist.artist}</p>
+                                <div className="bg-slate-700 p-2 rounded-xl">
+                                    <div className="w-[200px] lg:w-[200px] p-2" key={playlist.id}>
+                                        <img src={playlist.image} className='rounded-xl w-[100px]'/>
+                                        <p className="text-white font-bold mt-2 tracking-wide">{playlist.name}</p>
+                                        <p className="text-gray-100 text-sm">{playlist.artist}</p>
+                                    </div>
                                 </div>
+                                    
                             )
                         })}
                 </div>
