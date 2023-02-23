@@ -10,12 +10,17 @@ import { Link } from 'react-router-dom'
 export default function Navbar() {
     
     const { width } = useWindowDimensions()
-    const {isSearchToggled, dispatch, icons} = useContext(AppContext)
-    
+    const { isSearchToggled, dispatch, icons, accessToken, searchParameter } = useContext(AppContext)
+    const SpotifyApi = new SpotifyWebApi()
+    SpotifyApi.setAccessToken(accessToken)
     // Come Back to build the search function and page for the site
-    function handleSearch(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        // dispatch({type: 'setSearchToggled'})
+    function handleSearch(query: string) {
+        SpotifyApi.searchArtists(query)
+            .then(data=>{
+                console.log(data)
+            }, function (err){
+                console.error(err)
+            })
     }
     
     function navigationFunctionality(id: string){
@@ -96,7 +101,7 @@ export default function Navbar() {
                             src='logo.svg' 
                         />
                    </div>
-                   <form className={`flex items-center ${isSearchToggled ? 'bg-[#6b6868]': ''} p-1 rounded-md ${isSearchToggled ? 'border-2': ''} transition-all delay-200`} onSubmit={handleSearch}>
+                   <form className={`flex items-center ${isSearchToggled ? 'bg-[#6b6868]': ''} p-1 rounded-md ${isSearchToggled ? 'border-2': ''} transition-all delay-200`} onSubmit={(e)=>{e.preventDefault(); if(isSearchToggled){handleSearch(searchParameter)}}}>
                         <input 
                             type='text'
                             onChange={(e)=>{
@@ -104,12 +109,13 @@ export default function Navbar() {
                             }}
                             placeholder='Search artists'
                             className={`${isSearchToggled ? '' : 'hidden'} bg-transparent searchInput rounded-md text-white font-bold`}
+                            name='artist'
+                            value={searchParameter}
                         />
-                        <button onClick={()=>{isSearchToggled ? handleSearch : dispatch({type: 'setSearchToggled'})}} className={`${isSearchToggled ? 'text-[#251d1d]' : 'text-[#808080]'} text-[1.3rem] ml-2`}><FaSearch /></button>
+                        <button type={isSearchToggled ? 'submit' : 'button'} onClick={()=>dispatch({type: 'setSearchToggled'})} className={`${isSearchToggled ? 'text-[#251d1d]' : 'text-[#808080]'} text-[1.3rem] ml-2`}><FaSearch /></button>
                    </form>
                 </nav>
             }
         </>
     )
 }
-
