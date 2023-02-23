@@ -73,7 +73,8 @@ function App() {
     likedSongLength: 0,
     likedAlbumsAndPlaylist: [],
     playlistTracks: [],
-    uris: []
+    uris: [],
+    searchedArtists: []
   }
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
@@ -211,6 +212,11 @@ function App() {
           ...state,
           uris: action.payload.urisPayload
         }
+      case 'setSearchedArtists':
+        return {
+          ...state,
+          searchedArtists: action.payload.searchedArtistsPayload
+        }
       default :
         return state
     }
@@ -219,9 +225,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris} = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists } = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris}}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists }}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Home" element={<Home />} />

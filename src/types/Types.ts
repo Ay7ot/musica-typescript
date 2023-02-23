@@ -19,7 +19,8 @@ export interface AppContextInterface {
     likedSongLength: number,
     likedAlbumsAndPlaylist: playlistAndAlbums[],
     playlistTracks: trackType[],
-    uris: string[]
+    uris: string[],
+    searchedArtists: artistType[]
 }
 
 export interface ActionInterface {
@@ -43,7 +44,14 @@ export interface ActionInterface {
         likedAlbumsAndPlaylistPayload: playlistAndAlbums[],
         playlistTracksPayload: trackType[],
         urisPayload: string[]
+        searchedArtistsPayload: artistType[]
     }
+}
+export type artistType = {
+    name: string;
+    id: string;
+    image: string;
+    followers: string
 }
 
 export type IconType =  {

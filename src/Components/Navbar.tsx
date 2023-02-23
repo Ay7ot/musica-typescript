@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 export default function Navbar() {
     
     const { width } = useWindowDimensions()
-    const { isSearchToggled, dispatch, icons, accessToken, searchParameter } = useContext(AppContext)
+    const { isSearchToggled, dispatch, icons, accessToken, searchParameter, searchedArtists } = useContext(AppContext)
     const SpotifyApi = new SpotifyWebApi()
     SpotifyApi.setAccessToken(accessToken)
     // Come Back to build the search function and page for the site
@@ -18,6 +18,26 @@ export default function Navbar() {
         SpotifyApi.searchArtists(query)
             .then(data=>{
                 console.log(data)
+                const artists = data.artists.items.map(artist=>{
+                    let image = ''
+                    if(artist.images.length === 0){
+                        image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Blank_man_placeholder.svg/2048px-Blank_man_placeholder.svg.png'
+                    }else {
+                        image = artist.images[0].url
+                    }
+                    return {
+                        name: artist.name,
+                        image: image,
+                        id: artist.id,
+                        followers: artist.followers.total
+                    }
+                })
+                dispatch({
+                    type: 'setSearchedArtists',
+                    payload: {
+                        searchedArtistsPayload: artists
+                    }
+                })
             }, function (err){
                 console.error(err)
             })
@@ -115,6 +135,21 @@ export default function Navbar() {
                         <button type={isSearchToggled ? 'submit' : 'button'} onClick={()=>dispatch({type: 'setSearchToggled'})} className={`${isSearchToggled ? 'text-[#251d1d]' : 'text-[#808080]'} text-[1.3rem] ml-2`}><FaSearch /></button>
                    </form>
                 </nav>
+            }
+            {searchedArtists.length > 0 && 
+                <div className='h-[400px] overflow-y-scroll'>
+                    {searchedArtists.map(artist=>{
+                        return (
+                            <div className='h-[60px] p-2 flex bg-slate-700 mb-6 gap-5 rounded-lg'>
+                                <img src={artist.image} className='rounded-full'/>
+                                <div>
+                                    <p className='font-bold text-zinc-200 tracking-wide text-[1.1rem]'>{artist.name}</p>
+                                    <p className='text-white'>{artist.followers} Followers</p>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
             }
         </>
     )

@@ -61,5 +61,6 @@ export const AppContext = createContext<AppContextInterface>({
     likedSongLength: 0,
     likedAlbumsAndPlaylist: [],
     playlistTracks: [],
-    uris: []
+    uris: [],
+    searchedArtists: []
 });
