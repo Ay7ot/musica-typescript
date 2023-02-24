@@ -137,16 +137,18 @@ export default function Navbar() {
                 </nav>
             }
             {searchedArtists.length > 0 && 
-                <div className='h-[400px] overflow-y-scroll'>
+                <div className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw] sm:mt-4' :'mt-6 h-[400px] overflow-y-scroll'}`}>
                     {searchedArtists.map(artist=>{
                         return (
-                            <div className='h-[60px] p-2 flex bg-slate-700 mb-6 gap-5 rounded-lg'>
-                                <img src={artist.image} className='rounded-full'/>
-                                <div>
-                                    <p className='font-bold text-zinc-200 tracking-wide text-[1.1rem]'>{artist.name}</p>
-                                    <p className='text-white'>{artist.followers} Followers</p>
+                            <Link to='/viewArtist' state={artist} key={artist.id}>
+                                <div className='p-2 flex items-center bg-slate-700 mb-6 gap-5 rounded-lg' onClick={()=>dispatch({type: 'setChosenArtist'})}>
+                                    <img src={artist.image} className='rounded-full w-[55px] h-[55px]'/>
+                                    <div>
+                                        <p className='font-bold text-zinc-200 tracking-wide text-[1.1rem]'>{artist.name}</p>
+                                        <p className='text-white'>{artist.followers} Followers</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         )
                     })}
                 </div>

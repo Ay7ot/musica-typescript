@@ -20,7 +20,8 @@ export interface AppContextInterface {
     likedAlbumsAndPlaylist: playlistAndAlbums[],
     playlistTracks: trackType[],
     uris: string[],
-    searchedArtists: artistType[]
+    searchedArtists: artistType[],
+    searchedArtistTopTracks: songType[]
 }
 
 export interface ActionInterface {
@@ -44,7 +45,8 @@ export interface ActionInterface {
         likedAlbumsAndPlaylistPayload: playlistAndAlbums[],
         playlistTracksPayload: trackType[],
         urisPayload: string[]
-        searchedArtistsPayload: artistType[]
+        searchedArtistsPayload: artistType[],
+        SearchedArtistTopTracksPayload: songType[]
     }
 }
 export type artistType = {
