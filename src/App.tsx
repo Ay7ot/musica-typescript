@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react"
+import { useReducer, useContext } from "react"
 import { Routes, Route } from 'react-router-dom'
 import Login from "./Components/Login"
 import { ActionInterface, AppContextInterface, IconType } from "./types/Types"
@@ -11,71 +11,11 @@ import Profile from "./Components/Profile"
 import Home from "./Components/Home"
 import ViewAlbumPlaylist from "./Components/ViewAlbumPlaylist"
 import PlayerControl from "./Components/PlayerControl"
+import ArtistInfo from "./Components/ArtistInfo"
 
 function App() {
   
-  const initialState: AppContextInterface = {
-    isLoggedIn: false,
-    dispatch: () => {},
-    accessToken: '',
-    refreshToken: '',
-    isSearchToggled: false,
-    searchParameter: '',
-    icons: [
-    {
-        name: "Home",
-        id: nanoid(),
-        isActive: true
-    },
-    {
-        name: "Collections",
-        id: nanoid(),
-        isActive: false
-    },
-    {
-        name: "Radio",
-        id: nanoid(),
-        isActive: false
-    },
-    {
-        name: "Videos",
-        id: nanoid(),
-        isActive: false
-    },
-    {
-        name: "Profile",
-        id: nanoid(),
-        isActive: false
-    },
-    {
-        name: "Logout",
-        id: nanoid(),
-        isActive: false
-    }
-    ],
-    navToggled: false,
-    headerItem: {
-      name: '',
-      image:'',
-      href: '',
-      description: '',
-      id: '',
-      type: ''
-    },
-    featuredPlaylists: [],
-    recommendedPlaylists: [],
-    userPlaylist: [],
-    collections: {
-      isLikedPlaylistActive: true,
-      isLikedSongsActive: false
-    },
-    likedSongs: [],
-    likedSongLength: 0,
-    likedAlbumsAndPlaylist: [],
-    playlistTracks: [],
-    uris: [],
-    searchedArtists: []
-  }
+  const initialState: AppContextInterface = useContext(AppContext)
   
   function reducer(state: AppContextInterface, action: ActionInterface) {
     switch(action.type){
@@ -217,6 +157,18 @@ function App() {
           ...state,
           searchedArtists: action.payload.searchedArtistsPayload
         }
+      case 'setChosenArtist':
+        return {
+          ...state,
+          searchedArtists: [],
+          searchParameter: '',
+          isSearchToggled: false
+        }
+      case 'setSearchedArtistTopTracks':
+        return {
+          ...state,
+          searchedArtistTopTracks: action.payload.SearchedArtistTopTracksPayload
+        }
       default :
         return state
     }
@@ -225,9 +177,9 @@ function App() {
   const [mainState, dispatch] = useReducer(reducer, initialState)
   
   console.log(mainState)
-  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists } = mainState
+  const {isLoggedIn, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists, searchedArtistTopTracks } = mainState
   return (
-    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists }}>
+    <AppContext.Provider value={{isLoggedIn, dispatch, accessToken, refreshToken, isSearchToggled, searchParameter, icons, navToggled, headerItem, featuredPlaylists, recommendedPlaylists, userPlaylist, collections, likedSongs, likedSongLength, likedAlbumsAndPlaylist, playlistTracks, uris, searchedArtists, searchedArtistTopTracks }}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/Home" element={<Home />} />
@@ -236,6 +188,7 @@ function App() {
         <Route path="/Videos" element={<Videos />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/viewAlbum" element={<ViewAlbumPlaylist />} />
+        <Route path="/viewArtist" element={<ArtistInfo />} />
       </Routes>
       {isLoggedIn && <PlayerControl />}
     </AppContext.Provider>
