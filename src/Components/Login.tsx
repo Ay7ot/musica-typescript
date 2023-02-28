@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../Contexts/AppContext"
 import Home from "./Home";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Login() {
     const redirectUri = 'https://dot-musica.netlify.app/';
@@ -53,9 +53,9 @@ export default function Login() {
                 console.error(error);
             });
             
-            // const newUrl = window.location.href.replace(/\?code=.*$/, '');
-            // window.history.replaceState({}, document.title, newUrl);  
-            history('/Home')
+            const newUrl = window.location.href.replace(/\?code=.*$/, '');
+            window.history.replaceState({}, document.title, newUrl);  
+            // history('/Home')
         } else return
     },[code])
     
@@ -97,10 +97,12 @@ export default function Login() {
         setInterval(refreshAccessToken, 1800000)
     },[])
     
+    if(isLoggedIn){
+        return <Navigate to='/Home' />
+    }
+    
     return (
         <>
-            { isLoggedIn ? 
-                <Home /> :
                  <div className="bg-[#1E1E1E] min-h-screen flex flex-col items-center justify-center">
                     <p className="text-white font-bold text-[2rem] tracking-wide">Welcome!</p>
                     <button 
@@ -112,7 +114,7 @@ export default function Login() {
                         Login with Spotify
                     </button>
                 </div>
-            }
+            
         </>
     )
 }
