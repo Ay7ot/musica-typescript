@@ -16,7 +16,7 @@ export const AppContext = createContext<AppContextInterface>({
             isActive: true
         },
         {
-            name: "Collection",
+            name: "Collections",
             id: nanoid(),
             isActive: false
         },
@@ -63,5 +63,6 @@ export const AppContext = createContext<AppContextInterface>({
     playlistTracks: [],
     uris: [],
     searchedArtists: [],
-    searchedArtistTopTracks: []
+    searchedArtistTopTracks: [],
+    searchedArtistAlbums: []
 });

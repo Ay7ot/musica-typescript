@@ -21,7 +21,8 @@ export interface AppContextInterface {
     playlistTracks: trackType[],
     uris: string[],
     searchedArtists: artistType[],
-    searchedArtistTopTracks: songType[]
+    searchedArtistTopTracks: songType[],
+    searchedArtistAlbums: artistAlbums[]
 }
 
 export interface ActionInterface {
@@ -53,7 +54,8 @@ export type artistType = {
     name: string;
     id: string;
     image: string;
-    followers: string
+    followers: string,
+    bio: string
 }
 
 export type IconType =  {
@@ -157,6 +159,7 @@ export type tracks = {
     uri: string,
     is_local: boolean
 }
+
 export type playlistTrackType = {
     album: {
         album_type: string,
@@ -329,4 +332,14 @@ export type playlistAndAlbums = {
     id: string,
     image: string,
     type: string
+}
+
+export type artistAlbums = {
+    name: string,
+    href: string,
+    artist: string | undefined,
+    id: string,
+    image: string,
+    type: string,
+    releaseDate: string
 }

@@ -1,6 +1,7 @@
 
 import { HiUser, HiHome } from 'react-icons/hi'
 import { IoLogOut } from 'react-icons/io5'
+import { TbPlaylistAdd } from 'react-icons/tb'
 import { MdFeaturedPlayList, MdRadio, MdOndemandVideo } from 'react-icons/md'
 
 const useIcon = (iconName: string) => {
@@ -8,7 +9,7 @@ const useIcon = (iconName: string) => {
         case 'Home':
             return <HiHome />;
         case 'Collections' :
-            return <MdFeaturedPlayList />
+            return <TbPlaylistAdd />
         case 'Radio':
             return <MdRadio />
         case 'Videos': 

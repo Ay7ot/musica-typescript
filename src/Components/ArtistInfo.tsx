@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom"
 import { AppContext } from "../Contexts/AppContext"
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import NavMobile from "./NavMobile"
 import Navbar from "./Navbar"
 import useWindowDimensions from "../Hooks/windowDimensions"
@@ -15,6 +15,47 @@ export default function ArtistInfo() {
     const {width} = useWindowDimensions()
     const SpotifyApi = new SpotifyWebApi();
     SpotifyApi.setAccessToken(accessToken)
+    const [artistInfo, setArtistInfo] = useState<artistType | null>()
+    
+    useEffect(()=>{
+      SpotifyApi.getArtist(artist.id)
+        .then(data=>{
+          console.log(data)
+          
+          // setArtistInfo()
+        }, function(err){
+          console.error(err)
+        })
+    },[])
+    
+    useEffect(() => {
+        let offset = 0;
+        const retrieveTracks = () => {
+          SpotifyApi.getArtistAlbums(artist.id)
+            .then(data => {
+              const albums = data.items.map(item => {
+                return {
+                  name: item.name,
+                  href: item.href,
+                  artist: artist.name,
+                  image: item.images[0].url,
+                  type: 'album',
+                  // releaseDate: item.release_date
+                };
+              });
+      
+              if (data.next) {
+                retrieveTracks();
+              }
+            }, function (err) {
+              console.error(err);
+            });
+        };
+      
+        retrieveTracks();
+  
+    }, []);
+        
     
     useEffect(()=>{
       SpotifyApi.getArtistTopTracks(artist.id, 'US')
@@ -26,7 +67,7 @@ export default function ArtistInfo() {
               uri: track.uri,
               artist: track.artists[0].name,
               id: track.id,
-              image: track.album.images[0].url
+              image: track.album.images[0].url,
             }
           })
           dispatch({
