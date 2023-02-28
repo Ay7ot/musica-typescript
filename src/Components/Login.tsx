@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react"
 import { AppContext } from "../Contexts/AppContext"
 import Home from "./Home";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const redirectUri = 'https://dot-musica.netlify.app/';
     const scopes = 'user-library-read user-library-modify app-remote-control user-top-read streaming user-read-playback-state user-modify-playback-state user-read-currently-playing user-read-recently-played user-read-email user-read-private';
     const authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${import.meta.env.VITE_CLIENT_ID}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}`
     
+    const history = useNavigate()
     
     const [code, setCode] = useState<string | null>(null);
     
@@ -51,8 +53,9 @@ export default function Login() {
                 console.error(error);
             });
             
-            const newUrl = window.location.href.replace(/\?code=.*$/, '');
-            window.history.replaceState({}, document.title, newUrl);  
+            // const newUrl = window.location.href.replace(/\?code=.*$/, '');
+            // window.history.replaceState({}, document.title, newUrl);  
+            history('/Home')
         } else return
     },[code])
     

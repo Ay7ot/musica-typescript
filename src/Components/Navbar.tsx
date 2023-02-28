@@ -29,7 +29,7 @@ export default function Navbar() {
                         name: artist.name,
                         image: image,
                         id: artist.id,
-                        followers: artist.followers.total
+                        followers: artist.followers.total, 
                     }
                 })
                 dispatch({
