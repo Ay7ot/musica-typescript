@@ -102,19 +102,16 @@ export default function Login() {
     }
     
     return (
-        <>
-                 <div className="bg-[#1E1E1E] min-h-screen flex flex-col items-center justify-center">
-                    <p className="text-white font-bold text-[2rem] tracking-wide">Welcome!</p>
-                    <button 
-                        onClick={()=>{
-                            window.location.assign(authorizeUrl)
-                        }}
-                        className="bg-green-400 mt-2 text-white font-bold p-2 rounded-md text-[1.1rem] hover:bg-green-700 transition delay-200"
-                    >
-                        Login with Spotify
-                    </button>
-                </div>
-            
-        </>
+        <div className="bg-[#1E1E1E] min-h-screen flex flex-col items-center justify-center">
+            <p className="text-white font-bold text-[2rem] tracking-wide">Welcome!</p>
+            <button 
+                onClick={()=>{
+                    window.location.assign(authorizeUrl)
+                }}
+                className="bg-green-400 mt-2 text-white font-bold p-2 rounded-md text-[1.1rem] hover:bg-green-700 transition delay-200"
+            >
+                Login with Spotify
+            </button>
+        </div>
     )
 }
