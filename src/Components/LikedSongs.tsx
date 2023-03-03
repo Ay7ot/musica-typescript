@@ -62,13 +62,13 @@ export default function LikedSongs() {
   
   return (
     <div className='mt-6 px-[1px]'>
-      <div className='grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+      <div className='grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
         {likedSongs.map(item=>{
           return (
-            <div key={item.id} className='bg-[#c0b4b4] rounded-lg p-2'>
+            <div key={item.id} className='bg-[#041a20] rounded-lg p-2'>
               <img src={item.image} className='rounded-lg md:w-[200px]'/>
-              <p className='mt-4 text-gray-500 font-bold text-[0.8rem]'>{item.name}</p>
-              <p className='text-gray-700 font-bold text-[0.7rem]'>{item.artist}</p>
+              <p className='mt-4 text-gray-400 font-bold text-[0.8rem]'>{item.name}</p>
+              <p className='text-gray-500 font-bold text-[0.7rem]'>{item.artist}</p>
             </div>
           )
         })}

@@ -12,6 +12,7 @@ import Home from "./Components/Home"
 import ViewAlbumPlaylist from "./Components/ViewAlbumPlaylist"
 import PlayerControl from "./Components/PlayerControl"
 import ArtistInfo from "./Components/ArtistInfo"
+import SearchPage from "./Components/SearchPage"
 
 function App() {
   
@@ -189,6 +190,7 @@ function App() {
         <Route path="/Profile" element={<Profile />} />
         <Route path="/viewAlbum" element={<ViewAlbumPlaylist />} />
         <Route path="/viewArtist" element={<ArtistInfo />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
       {isLoggedIn && <PlayerControl />}
     </AppContext.Provider>

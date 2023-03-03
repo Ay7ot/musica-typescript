@@ -42,7 +42,22 @@ export default function HomeHeader() {
         )
     }, [])
     
-    
+    function playFeaturedPlaylist(){
+        SpotifyApi.getPlaylistTracks(headerItem.id) 
+        .then(data=>{
+            console.log(data)
+            const payload = data.items.map(item=>{
+                return item.track.uri
+            })
+            dispatch({
+                type: 'setUris',
+                payload: {
+                    urisPayload: payload
+                }
+            })
+        })
+    }
+     
     useEffect(() => {
         SpotifyApi.getFeaturedPlaylists()
             .then(data=>{
@@ -105,7 +120,7 @@ export default function HomeHeader() {
                     <p className='text-[2rem] md:text-[2.3rem] lg:text-[1.5rem] font-bold text-[#A4C7C6]'>{headerItem.name}</p>
                     <p className='text-[0.9rem] font-semibold text-[#808080] lg:text-[0.8rem]'>{headerItem.description}</p>
                     <div className='grid grid-cols-2 sm:flex sm:gap-0 gap-7 justify-between mt-3 sm:px-2 md:px-0 lg:grid lg:grid-cols-2 lg:gap-1'>
-                        <button className='bg-[#808080] flex p-2 items-center justify-center rounded-full'>
+                        <button className='bg-[#808080] flex p-2 items-center justify-center rounded-full' onClick={playFeaturedPlaylist}>
                             <i className='text-yellow-400 lg:text-[0.9rem]'><FaPlayCircle /></i>
                             <p className='ml-2 text-[0.8rem] lg:text-[0.6rem] xl:text-[0.7rem] font-semibold text-white'>Play All</p>
                         </button>
