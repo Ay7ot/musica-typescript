@@ -1,0 +1,2 @@
+[build]
+  ignore = "spandors-trivia/**"
