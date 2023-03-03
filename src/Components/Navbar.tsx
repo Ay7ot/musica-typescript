@@ -5,7 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import { AppContext } from '../Contexts/AppContext'
 import SpotifyWebApi from 'spotify-web-api-js'
 import useIcon from '../Hooks/useIcons'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
     
@@ -13,9 +13,12 @@ export default function Navbar() {
     const { isSearchToggled, dispatch, icons, accessToken, searchParameter, searchedArtists } = useContext(AppContext)
     const SpotifyApi = new SpotifyWebApi()
     SpotifyApi.setAccessToken(accessToken)
+    const history = useNavigate()
+    
     // Come Back to build the search function and page for the site
-    function handleSearch(query: string) {
-        SpotifyApi.searchArtists(query)
+    
+    async function handleSearch(query: string) {
+        await SpotifyApi.searchArtists(query)
             .then(data=>{
                 console.log(data)
                 const artists = data.artists.items.map(artist=>{
@@ -41,6 +44,8 @@ export default function Navbar() {
             }, function (err){
                 console.error(err)
             })
+            
+        history('/search')
     }
     
     function navigationFunctionality(id: string){
@@ -65,8 +70,13 @@ export default function Navbar() {
                         <LazyLoadImage 
                             src='logo.svg'
                         />
-                        <div className='flex ml-10 items-center'>
-                            <i className='text-gray-500 mr-4 text-sm'><FaSearch /></i>
+                        <form className='flex ml-10 items-center'
+                            onSubmit={(e)=>{
+                                e.preventDefault(); 
+                                handleSearch(searchParameter)
+                            }}
+                        >
+                            <button className='text-gray-500 mr-4 text-sm'><FaSearch /></button>
                             <input
                                 className='bg-transparent searchInput text-gray-400 font-semibold'
                                 type='text'
@@ -75,7 +85,7 @@ export default function Navbar() {
                                 }}
                                 placeholder='Search artists'
                             />
-                        </div>
+                        </form>
                     </div>
                     <nav className='absolute mt-6 w-[5%] flex flex-col justify-between items-center p-2'>
                         <div className='bg-[#1D2123] px-3 py-6 h-[14rem] flex flex-col justify-between bg-[1A1E1F] rounded-full'>
@@ -121,7 +131,14 @@ export default function Navbar() {
                             src='logo.svg' 
                         />
                    </div>
-                   <form className={`flex items-center ${isSearchToggled ? 'bg-[#6b6868]': ''} p-1 rounded-md ${isSearchToggled ? 'border-2': ''} transition-all delay-200`} onSubmit={(e)=>{e.preventDefault(); if(isSearchToggled){handleSearch(searchParameter)}}}>
+                   <form className={`flex items-center ${isSearchToggled ? 'bg-[#6b6868]': ''} p-1 rounded-md ${isSearchToggled ? 'border-2': ''} transition-all delay-200`} 
+                        onSubmit={(e)=>{
+                            e.preventDefault(); 
+                            if(isSearchToggled){
+                                handleSearch(searchParameter)
+                            }
+                        }}
+                    >
                         <input 
                             type='text'
                             onChange={(e)=>{
@@ -135,23 +152,6 @@ export default function Navbar() {
                         <button type={isSearchToggled ? 'submit' : 'button'} onClick={()=>dispatch({type: 'setSearchToggled'})} className={`${isSearchToggled ? 'text-[#251d1d]' : 'text-[#808080]'} text-[1.3rem] ml-2`}><FaSearch /></button>
                    </form>
                 </nav>
-            }
-            {searchedArtists.length > 0 && 
-                <div className={`${width > 768 ? 'relative left-[5rem] mt-[2.1rem] w-[85vw] sm:mt-4' :'mt-6 h-[400px] overflow-y-scroll'}`}>
-                    {searchedArtists.map(artist=>{
-                        return (
-                            <Link to='/viewArtist' state={artist} key={artist.id}>
-                                <div className='p-2 flex items-center bg-slate-700 mb-6 gap-5 rounded-lg' onClick={()=>dispatch({type: 'setChosenArtist'})}>
-                                    <img src={artist.image} className='rounded-full w-[55px] h-[55px]'/>
-                                    <div>
-                                        <p className='font-bold text-zinc-200 tracking-wide text-[1.1rem]'>{artist.name}</p>
-                                        <p className='text-white'>{artist.followers} Followers</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        )
-                    })}
-                </div>
             }
         </>
     )
